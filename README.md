@@ -4,6 +4,6 @@ Disciplina: Aplicação de Teoria dos Grafos   -- --    Professor: Everton Alves
 Grupo: Anarco Nascimento
        Lilian Teixeira
        Helena Dantas
-       Victor Araujo
+       Vitor Arruda
        Manoel Neto
        
