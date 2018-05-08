@@ -10,7 +10,6 @@ public class Graph {
 	
 	private List<Vertex> graph;
 	
-	
 	public Graph() {
 		graph = new ArrayList<>();
 	}
@@ -27,8 +26,8 @@ public class Graph {
 	                linha = reader.readLine().split(" ");               
 	             	weight = Float.parseFloat(linha[2]);                                  
 	                
-	                Vertex firstVertex = searchById(linha[0]);
-	                Vertex secondVertex = searchById(linha[1]);
+	                Vertex firstVertex = searchVertexById(linha[0]);
+	                Vertex secondVertex = searchVertexById(linha[1]);
 	                
 	                if(firstVertex != null && secondVertex != null) firstVertex.addWeightedConnection(secondVertex, weight);
 	                
@@ -64,7 +63,7 @@ public class Graph {
 		return "Quantidade de vertices: " + graph.size();
 	}
 	
-	private Vertex searchById(String id) {
+	private Vertex searchVertexById(String id) {
 		
 		for(Vertex v: graph) {
 			if(v.getId().equals(id)) return v;

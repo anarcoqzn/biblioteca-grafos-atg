@@ -20,7 +20,7 @@ public class Vertex {
 	
 	public void addWeightedConnection(Vertex v, Float weight){
 		this.connectedVertices.put(v, weight);
-		v.connectedVertices.put(this, weight);
+		v.connectedVertices.put(this, weight);    //A conexao entre dois vertices eh feita bilateralmente
 	}
 	
 	public void setId(String id) {
