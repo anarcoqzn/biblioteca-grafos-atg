@@ -17,35 +17,35 @@ public class Graph {
 	public void readWeightedGraph(String path) throws IOException {
 		BufferedReader reader = new BufferedReader(new FileReader(path));
 		
-		 int qtdVertex = Integer.parseInt(reader.readLine());
-		 String[] linha;
+		 int allVertices = Integer.parseInt(reader.readLine());
+		 String[] line;
 		 Float weight;
 		 
-	        for(int i = 0; i <= qtdVertex; i++) {
+	        for(int i = 0; i <= allVertices; i++) {
 	        	
-	                linha = reader.readLine().split(" ");               
-	             	weight = Float.parseFloat(linha[2]);                                  
+	                line = reader.readLine().split(" ");               
+	             	weight = Float.parseFloat(line[2]);                                  
 	                
-	                Vertex firstVertex = searchVertexById(linha[0]);
-	                Vertex secondVertex = searchVertexById(linha[1]);
+	                Vertex firstVertex = searchVertexById(line[0]);
+	                Vertex secondVertex = searchVertexById(line[1]);
 	                
 	                if(firstVertex != null && secondVertex != null) firstVertex.addWeightedConnection(secondVertex, weight);
 	                
 	                else if(firstVertex != null && secondVertex == null){
 	                	
-	                	secondVertex = new Vertex(linha[1]);
+	                	secondVertex = new Vertex(line[1]);
 	               		firstVertex.addWeightedConnection(secondVertex, weight);
 	               		graph.add(secondVertex);
 	        	                	
 	                }else if(firstVertex == null && secondVertex != null) {
 	                	
-	                	firstVertex = new Vertex(linha[0]);
+	                	firstVertex = new Vertex(line[0]);
 	                	firstVertex.addWeightedConnection(secondVertex, weight);
 	                	graph.add(firstVertex);
 	                	
 	                }else {
-	                	firstVertex = new Vertex(linha[0]);
-	                	secondVertex = new Vertex(linha[1]);
+	                	firstVertex = new Vertex(line[0]);
+	                	secondVertex = new Vertex(line[1]);
 	                	
 	                	firstVertex.addWeightedConnection(secondVertex, weight);
 	                	graph.add(firstVertex);
