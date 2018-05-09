@@ -17,42 +17,48 @@ public class Graph {
 	public void readWeightedGraph(String path) throws IOException {
 		BufferedReader reader = new BufferedReader(new FileReader(path));
 		
-		 int allVertices = Integer.parseInt(reader.readLine());
-		 String[] line;
-		 Float weight;
-		 
-	        for(int i = 0; i <= allVertices; i++) {
-	        	
-	                line = reader.readLine().split(" ");               
-	             	weight = Float.parseFloat(line[2]);                                  
+		int allVertices = Integer.parseInt(reader.readLine());
+		String line1 = reader.readLine();
+		Float weight;
+			
+			do{
+					String[] vertexData = line1.split(" ");
+	             	weight = Float.parseFloat(vertexData[2]);                                  
 	                
-	                Vertex firstVertex = searchVertexById(line[0]);
-	                Vertex secondVertex = searchVertexById(line[1]);
+	                Vertex firstVertex = searchVertexById(vertexData[0]);
+	                Vertex secondVertex = searchVertexById(vertexData[1]);
 	                
 	                if(firstVertex != null && secondVertex != null) firstVertex.addWeightedConnection(secondVertex, weight);
 	                
 	                else if(firstVertex != null && secondVertex == null){
 	                	
-	                	secondVertex = new Vertex(line[1]);
+	                	secondVertex = new Vertex(vertexData[1]);
 	               		firstVertex.addWeightedConnection(secondVertex, weight);
 	               		graph.add(secondVertex);
 	        	                	
 	                }else if(firstVertex == null && secondVertex != null) {
 	                	
-	                	firstVertex = new Vertex(line[0]);
+	                	firstVertex = new Vertex(vertexData[0]);
 	                	firstVertex.addWeightedConnection(secondVertex, weight);
 	                	graph.add(firstVertex);
 	                	
 	                }else {
-	                	firstVertex = new Vertex(line[0]);
-	                	secondVertex = new Vertex(line[1]);
+	                	firstVertex = new Vertex(vertexData[0]);
+	                	secondVertex = new Vertex(vertexData[1]);
 	                	
 	                	firstVertex.addWeightedConnection(secondVertex, weight);
 	                	graph.add(firstVertex);
 	                	graph.add(secondVertex);
 	                }   
-	        }
+	                line1 = reader.readLine();
+	                               
+	        }while(line1 != null);
+			
 	        reader.close();
+	}
+	
+	public Float getMeanEdge(Graph graph) {
+		return null;
 	}
 	
 	@Override

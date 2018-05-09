@@ -36,7 +36,13 @@ public class Vertex {
 		return Integer.parseInt(id);
 	}
 	
-	public boolean equals(Vertex v) {
-		return this.hashCode() == v.hashCode();
+	@Override
+	public boolean equals(Object obj) {
+			if(obj instanceof Vertex) {
+				obj = (Vertex) obj;
+				if(obj.hashCode() == this.hashCode()) return true;
+			}
+		return false;
 	}
+	
 }
