@@ -8,8 +8,10 @@ public class Main {
 		
 		Graph grafo = new Graph();
 		
-		grafo.readWeightedGraph("resources/grafo.txt");
+		grafo = GraphFactory.readWeightedGraph("resources/grafo.txt");
 		
+		
+//		Graph g2 = ManipuladorGrafo.readGraph("path");
 		
 		System.out.println(grafo);
 	}
