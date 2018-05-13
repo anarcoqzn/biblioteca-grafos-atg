@@ -1,5 +1,7 @@
 package manager;
 
+import java.io.IOException;
+
 import model.graph.Graph;
 import model.vertex.Vertex;
 
@@ -14,7 +16,7 @@ import model.vertex.Vertex;
 public interface GraphManageable {
 	
 	public Graph readGraph(String path);
-	public Graph readWeightedGraph(String path);
+	public Graph readWeightedGraph(String path) throws IOException;
 	
 	public int getVertexNumber(Graph graph);
 	public int getEdgeNumber(Graph graph) ;

@@ -2,18 +2,20 @@
 
 import java.io.IOException;
 
+import manager.GraphManageable;
+import manager.GraphManager;
+import model.graph.Graph;
+
 public class Main {
 
 	public static void main(String[] args) throws IOException {
+	
+		GraphManageable manager = new GraphManager();
 		
-//		Graph grafo = new Graph();
+		Graph g = manager.readWeightedGraph("resources/grafo.txt");
 		
-//		grafo = GraphFactory.readWeightedGraph("resources/grafo.txt");
+		System.out.println(g);
 		
-		
-//		Graph g2 = ManipuladorGrafo.readGraph("path");
-		
-//		System.out.println(grafo);
 	}
 
 }
