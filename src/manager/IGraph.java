@@ -1,4 +1,7 @@
-package base;
+package manager;
+
+import model.graph.Graph;
+import model.vertex.VWeighted;
 
 public interface IGraph {
 
@@ -12,11 +15,11 @@ public interface IGraph {
 	
 	public String graphRepresentation (Graph graph,String type);
 	
-	public String BFS(Graph graph,Vertex v); 
-	public String DFS(Graph graph,Vertex v);
+	public String BFS(Graph graph,VWeighted v); 
+	public String DFS(Graph graph,VWeighted v);
 	
 	public String SCC(Graph graph);
-	public String shortestPath(Vertex v1,Vertex v2);
+	public String shortestPath(VWeighted v1,VWeighted v2);
 	
 	public String mst(Graph graph); 
 }
