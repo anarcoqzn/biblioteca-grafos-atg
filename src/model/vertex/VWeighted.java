@@ -5,11 +5,15 @@ import java.util.List;
 
 public class VWeighted extends Vertex{
 	
-	protected List<Float> connectionWeights; 
+	protected List<Float> edgeWeights; 
 	
 	public VWeighted(String id) {
 		this.id = id;
-		this.connectionWeights = new ArrayList<>();
+		this.edgeWeights = new ArrayList<>();
 		this.connectedVertices = new ArrayList<>();
+	}
+	
+	public List<Float> getEdgeWeights() {
+		return edgeWeights;
 	}
 }
