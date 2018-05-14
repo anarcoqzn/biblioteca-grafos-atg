@@ -1,11 +1,17 @@
 package model.vertex;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Vertex {
 	
 	protected String id;
 	protected List<Vertex> connectedVertices;
+	
+	public Vertex(String id) {
+		this.id = id;
+		connectedVertices = new ArrayList<>();
+	}
 	
 	public String getId() {
 		return this.id;

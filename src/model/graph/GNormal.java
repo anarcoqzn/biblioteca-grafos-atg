@@ -1,13 +1,19 @@
 package model.graph;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import model.vertex.VNormal;
 
 public class GNormal extends Graph{
 	
+
+	public GNormal(int verticesQuantity) {
+		super(verticesQuantity);
+	}
 	
+	public void addConnection(VNormal v1, VNormal v2) {
+		this.vertices.add(v1);
+		this.vertices.add(v2);
+		
+		v1.connectTo(v2);
+	}
 	
 }
