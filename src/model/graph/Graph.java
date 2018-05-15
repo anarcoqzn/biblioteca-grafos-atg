@@ -21,6 +21,10 @@ public abstract class Graph {
 		return true;
 	}
 	
+	public List getListofVertex() {
+		return graph;
+	}
+	
 	@Override
 	public String toString() {
 		graph.forEach(v -> v.getConnectedVertices().forEach(

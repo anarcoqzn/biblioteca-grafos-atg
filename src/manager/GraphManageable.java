@@ -29,5 +29,6 @@ public interface GraphManageable {
 	public String shortestPath(Vertex v1, Vertex v2);
 	
 	public String mst(Graph graph); 
+	public boolean path(Vertex v1, Vertex v2);
 }
 
