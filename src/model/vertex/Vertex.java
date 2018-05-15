@@ -6,11 +6,20 @@ public abstract class Vertex {
 	
 	protected String id;
 	protected List<Vertex> connectedVertices;
+	protected boolean ink;
 	
 	public String getId() {
 		return this.id;
 	}
+
+	public boolean getInk() {
+		return ink;
+	}
 	
+	public void setInk(boolean ink) {
+		this.ink = ink;
+	}
+
 	public List<Vertex> getConnectedVertices(){
 		return this.connectedVertices;
 	}

@@ -12,6 +12,15 @@ public abstract class Graph {
 		graph = new ArrayList<>();
 	}
 	
+	public boolean isColored () {
+		for(Vertex v : this.graph) {
+			if(v.getInk() == false) {
+				return false;
+			}	
+		}
+		return true;
+	}
+	
 	@Override
 	public String toString() {
 		graph.forEach(v -> v.getConnectedVertices().forEach(

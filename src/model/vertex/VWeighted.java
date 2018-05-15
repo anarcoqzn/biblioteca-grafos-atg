@@ -11,6 +11,7 @@ public class VWeighted extends Vertex{
 		this.id = id;
 		this.edgeWeights = new ArrayList<>();
 		this.connectedVertices = new ArrayList<>();
+		this.ink = false;
 	}
 	
 	public List<Float> getEdgeWeights() {
