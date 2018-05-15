@@ -19,7 +19,7 @@ public class Main {
 		
 //		System.out.println(grafo);
 		
-		grafo = GraphManager.readGraph1("resources/grafoSimples.txt");//("C:\\Users\\lilia\\Desktop\\grafos.txt");//"resources/grafoSimples.txt");
+		//grafo = GraphManager.readGraph("resources/grafoSimples.txt");//("C:\\Users\\lilia\\Desktop\\grafos.txt");//"resources/grafoSimples.txt");
 		
 		///////////////////////////////////
 		

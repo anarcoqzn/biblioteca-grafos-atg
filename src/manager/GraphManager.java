@@ -1,17 +1,13 @@
 package manager;
 
-import java.awt.List;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import model.graph.GNormal;
-import model.graph.GWeighted;
 import model.graph.Graph;
-import model.vertex.VWeighted;
+import model.vertex.VNormal;
 import model.vertex.Vertex;
 
 public class GraphManager implements GraphManageable {
@@ -19,59 +15,57 @@ public class GraphManager implements GraphManageable {
 	@Override
 	public Graph readGraph(String path) throws IOException{
 		// TODO Auto-generated method stub
-		return null;
+		
+		BufferedReader ler; 
+		int vertices;
+		Graph graph = null;
+		String texto;
+		String[] quantidadeVertices;
+		
+		try {
+			
+			ler = new BufferedReader(new FileReader(path));
+			vertices = Integer.parseInt(ler.readLine());
+			graph = new GNormal(vertices);
+			texto = ler.readLine();
+			
+			while(texto != null ) {
+				
+				quantidadeVertices = texto.split("");
+				VNormal vertice1 = (VNormal) graph.searchVertexById(quantidadeVertices[0]) ;
+				VNormal vertice2 = (VNormal) graph.searchVertexById(quantidadeVertices[1]);
+				
+				if(vertice1 != null && vertice2 != null) {
+					vertice1.connectTo(vertice2);
+				}else if(vertice1 != null && vertice2 == null) {
+					vertice2 = new VNormal(quantidadeVertices[1]);
+					vertice1.connectTo(vertice2);
+					graph.addVertex(vertice2);
+				}else if(vertice1 == null && vertice2 != null) {
+					vertice1 = new VNormal(quantidadeVertices[0]);
+					vertice1.connectTo(vertice2);
+					graph.addVertex(vertice1);
+				}else {
+					vertice1 = new VNormal(quantidadeVertices[0]);
+					vertice2 = new VNormal(quantidadeVertices[1]);
+					
+					vertice1.connectTo(vertice2);
+					
+					graph.addVertex(vertice1);
+					graph.addVertex(vertice2);
+				}
+ 			
+			}
+			ler.close();
+		}catch(FileNotFoundException e){  
+            e.printStackTrace();  
+        }catch(IOException e){  
+            e.printStackTrace();  
+        }  
+		
+		return graph;
 	}
 	
-	//teve que ficar estatico
-	//corrigir
-	public static Graph readGraph1(String path) {
-		
-		Graph graph ;
-		
-		String texto;  
-		int contador = 0;
-		//local onde esta o texto
-	    File file = new File(path);
-	    
-	    String[] array = null;
-		
-	     
-	        try{  
-	            BufferedReader br = new BufferedReader(new FileReader(file)); 
-	          //  int tamanhoArray ;
-	            
-	            
-	            
-	            while((texto = br.readLine()) != null){
-	            	//tamanhoArray = Integer.parseInt(texto);
-	            	
-	            	if(contador == 0) {
-	            	System.out.println("Número de vértices: " + texto);
-	            		//array = new String[tamanhoArray];
-	            	contador += 1;
-	            	}else {
-	            		/**for(int i=1; i< array.length  ; i++) {
-	            			array[i] = br.readLine();
-	            			System.out.println("a" + array[i]);
-	            		}*/
-	            		System.out.println("Aresta: " + texto);
-	            		
-	            	}
-	            }  
-	            br.close();
-	        }catch(FileNotFoundException e){  
-	            e.printStackTrace();  
-	        }catch(IOException e){  
-	            e.printStackTrace();  
-	        }  
-	    
-		
-		//return graph;
-		 return null;
-		
-
-	}
-
 	@Override
 	public Graph readWeightedGraph(String path) {
 		return null;
