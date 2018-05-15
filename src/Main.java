@@ -12,10 +12,13 @@ public class Main {
 	
 		GraphManageable manager = new GraphManager();
 		
-		Graph g = manager.readWeightedGraph("resources/grafo.txt");
+		Graph g = manager.readWeightedGraph("resources/weightedGraph.txt");
 		
 		System.out.println(g);
+				
+		Graph g2 = manager.readGraph("resources/simpleGraph.txt");
+		
+		System.out.println(g2);
 		
 	}
-
 }

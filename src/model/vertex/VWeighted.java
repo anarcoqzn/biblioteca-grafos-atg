@@ -5,7 +5,7 @@ import java.util.List;
 
 public class VWeighted extends Vertex{
 	
-	protected List<Float> edgeWeights; 
+protected List<Float> edgeWeights; 
 	
 	public VWeighted(String id) {
 		super(id);

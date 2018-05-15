@@ -28,7 +28,7 @@ public abstract class Vertex {
 	@Override
 	public boolean equals(Object obj) {
 			if(obj instanceof Vertex) {
-				obj = (VWeighted) obj;
+				obj = (Vertex) obj;
 				if(obj.hashCode() == this.hashCode()) return true;
 			}
 		return false;

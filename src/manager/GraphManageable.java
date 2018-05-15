@@ -1,14 +1,12 @@
 package manager;
 
-import java.io.IOException;
-
 import model.graph.Graph;
 import model.vertex.Vertex;
 
 
 /**
  * 
- * @authors Helena Dantas, Victor Arruda, Anarco Nascimento, Manoel Neto and Llian Tenorio
+ * @authors Anarco Nascimento, Helena Dantas, Lílian Teixeira, Manoel Neto and Victor Arruda
  * 
  * This library is capable of creating and representing graphs, and manipulating a set of classical algorithms over graphs
  * 
@@ -16,7 +14,7 @@ import model.vertex.Vertex;
 public interface GraphManageable {
 	
 	public Graph readGraph(String path);
-	public Graph readWeightedGraph(String path) throws IOException;
+	public Graph readWeightedGraph(String path);
 	
 	public int getVertexNumber(Graph graph);
 	public int getEdgeNumber(Graph graph) ;

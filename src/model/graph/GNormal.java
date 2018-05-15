@@ -4,6 +4,7 @@ import model.vertex.VNormal;
 
 public class GNormal extends Graph{
 	
+
 	public GNormal(int verticesQuantity) {
 		super(verticesQuantity);
 	}
