@@ -17,54 +17,72 @@ public class GraphManager implements GraphManageable {
 	@Override
 	public Graph readGraph(String path){
 		
-		BufferedReader ler; 
-		int vertices;
+		BufferedReader ler; 		
+		String primeiraLinha = null;
+		int quantidadeVertices = 0;
 		Graph graph = null;
-		String texto;
-		String[] quantidadeVertices;
-		
+				
 		try {
-			
+					
 			ler = new BufferedReader(new FileReader(path));
-			vertices = Integer.parseInt(ler.readLine());
-			graph = new GNormal(vertices);
-			texto = ler.readLine();
-			
-			while(texto != null ) {
-				
-				quantidadeVertices = texto.split(" ");
-				VNormal vertice1 = (VNormal) graph.searchVertexById(quantidadeVertices[0]) ;
-				VNormal vertice2 = (VNormal) graph.searchVertexById(quantidadeVertices[1]);
-				
+			quantidadeVertices = Integer.parseInt(ler.readLine());
+			primeiraLinha = ler.readLine();
+			graph = new GNormal(quantidadeVertices);
+					
+			System.out.println("Quantidade de vertices: " + quantidadeVertices);
+					
+			do {
+					
+				String[] quantidadeVertice = primeiraLinha.split(" ");
+						
+				VNormal vertice1 = (VNormal) graph.searchVertexById(quantidadeVertice[0]) ;
+				VNormal vertice2 = (VNormal) graph.searchVertexById(quantidadeVertice[1]);
+						
 				if(vertice1 != null && vertice2 != null) {
+					
 					vertice1.connectTo(vertice2);
+					
 				}else if(vertice1 != null && vertice2 == null) {
-					vertice2 = new VNormal(quantidadeVertices[1]);
+					
+					vertice2 = new VNormal(quantidadeVertice[1]);
 					vertice1.connectTo(vertice2);
+					
 					graph.addVertex(vertice2);
+					
 				}else if(vertice1 == null && vertice2 != null) {
-					vertice1 = new VNormal(quantidadeVertices[0]);
+
+					vertice1 = new VNormal(quantidadeVertice[0]);
 					vertice1.connectTo(vertice2);
+					
 					graph.addVertex(vertice1);
+						
 				}else {
-					vertice1 = new VNormal(quantidadeVertices[0]);
-					vertice2 = new VNormal(quantidadeVertices[1]);
-					
+							
+					vertice1 = new VNormal(quantidadeVertice[0]);
+					vertice2 = new VNormal(quantidadeVertice[1]);
 					vertice1.connectTo(vertice2);
-					
+							
 					graph.addVertex(vertice1);
 					graph.addVertex(vertice2);
 				}
-				texto = ler.readLine();
- 			
-			}
-			ler.close();
+						
+				System.out.println("Arestas : " + quantidadeVertice[0]+ "->" + quantidadeVertice[1]);
+				
+				primeiraLinha = ler.readLine();
+		 			
+				}while(primeiraLinha!= null);
+						
+					ler.close();
+				
 		}catch(FileNotFoundException e){  
-            e.printStackTrace();  
-        }catch(IOException e){  
-            e.printStackTrace();  
-        }  
-		
+		            
+			e.printStackTrace();  
+		     
+		}catch(IOException e){  
+		           
+			e.printStackTrace();  
+		}  
+				
 		return graph;
 	}
 	

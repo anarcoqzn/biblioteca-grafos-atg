@@ -1,6 +1,5 @@
 /Main.class
-/grafo.txt
 /manager/
 /model/
-/grafos.txt
-/grafoSimples.txt
+/simpleGraph.txt
+/weightedGraph.txt
