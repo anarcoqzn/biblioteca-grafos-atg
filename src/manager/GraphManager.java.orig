@@ -1,14 +1,18 @@
 package manager;
 
+<<<<<<< HEAD
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import model.graph.GNormal;
 import model.graph.GWeighted;
+=======
+import java.util.ArrayList;
+import java.util.List;
+
+>>>>>>> master
 import model.graph.Graph;
 import model.vertex.VNormal;
 import model.vertex.VWeighted;

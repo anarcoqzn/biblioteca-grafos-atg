@@ -2,16 +2,35 @@ package model.graph;
 
 import java.util.ArrayList;
 import java.util.List;
-import model.vertex.*;
+
+import model.vertex.Vertex;
 
 public abstract class Graph {
 	
 	protected List<Vertex> vertices;
 	protected int verticesQuantity;
 	
+<<<<<<< HEAD
 	public Graph(int verticesQuantity) {
 		this.verticesQuantity = verticesQuantity;
 		this.vertices = new ArrayList<>(verticesQuantity);
+=======
+	public boolean isColored () {
+		for(Vertex v : this.graph) {
+			if(v.getInk() == false) {
+				return false;
+			}	
+		}
+		return true;
+	}
+	
+	@Override
+	public String toString() {
+		graph.forEach(v -> v.getConnectedVertices().forEach(
+				connection -> System.out.println(v + " -> " + connection))); 
+		
+		return "Quantidade de vertices: " + graph.size();
+>>>>>>> master
 	}
 	
 	public Vertex searchVertexById(String id) {
@@ -35,14 +54,5 @@ public abstract class Graph {
 				connection -> System.out.println(v + " -> " + connection))); 
 		
 		return "Quantidade de vertices: " + vertices.size();
-	}
-
-	public boolean isColored () {
-		for(Vertex v : vertices) {
-			if(v.getInk() == false) {
-				return false;
-			}	
-		}
-		return true;
 	}
 }

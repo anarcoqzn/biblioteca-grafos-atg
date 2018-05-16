@@ -1,0 +1,19 @@
+package model.vertex;
+
+public class VNormal extends Vertex{
+
+	public VNormal(String id) {
+<<<<<<< HEAD
+		super(id);
+	}
+	
+	public void connectTo(Vertex vertex) {
+		this.connectedVertices.add(vertex);
+		vertex.connectedVertices.add(this);
+=======
+		this.id = id;
+		this.connectedVertices = new ArrayList<>();
+		this.ink = false;
+>>>>>>> master
+	}
+}
