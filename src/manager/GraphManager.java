@@ -144,8 +144,7 @@ public class GraphManager implements GraphManageable {
 
 	@Override
 	public int getVertexNumber(Graph graph) {
-		// TODO Auto-generated method stub
-		return 0;
+		return graph.getVertexNumber();
 	}
 
 	@Override
