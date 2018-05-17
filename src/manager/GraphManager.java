@@ -120,20 +120,14 @@ public class GraphManager implements GraphManageable {
 		// metodo que retorna um boolean para se o grafo é conexo ou não, ou seja,
 		// se é possivel encontrar um caminho de qualquer vertice do grafo pra qualquer vertice do grafo.
 		List<Vertex> vertex = graph.getListofVertex(); // lista dos vertices do grafo;
-		boolean retorno =  true; // defino que o grafo é conexo até encontrar um caso que prove o contrario;
 		for (int i = 0;i < vertex.size()- 1; i++) { //faço um varredura de todas as combinações de vertices;
 			for (int j = i+1; j < vertex.size(); j++) { 
 				if(!path(vertex.get(i), vertex.get(j))) { // caso não tenha um caminho entre o vertice i e j;
-					retorno = false; // define retorno  falso;
-					break; // quebra o segundo laço;
+					return false; 	
 				}
 			}
-			if(retorno == false) { // caso retorno seja falso, quebra o primeiro laço;
-				break;
-			}
-			
 		}
-		return retorno;
+		return true;
 	}
 
 	@Override
@@ -151,28 +145,25 @@ public class GraphManager implements GraphManageable {
 	@Override
 	public boolean path (Vertex v1, Vertex v2) {
 		ArrayList<Vertex> caminho = new ArrayList<Vertex>();
-		Boolean retorno = false;
 		v1.setInk(true);	
 		caminho.add(v1);	
 		while (!caminho.isEmpty()){		
 			List<Vertex> aux = caminho.get(0).getConnectedVertices();	
 			while(!aux.isEmpty()){		
 				if(aux.get(0).getInk() == false) {
-					if(aux.get(0).equals(v2)) {
-						retorno = true;
-						break;
+					if(aux.get(0).getId().equals(v2.getId())) {
+						return true;
 					}
-					aux.get(0).setInk(true);
-					caminho.add(aux.get(0));	
+					else {	
+						aux.get(0).setInk(true);
+						caminho.add(aux.get(0));
+					}
 				}
 				aux.remove(0);
 			}
-			if(retorno == true) {
-				break;
-			}
 			caminho.remove(0);	
 		}
-		return retorno;
+		return false;
 	}
 	
 }

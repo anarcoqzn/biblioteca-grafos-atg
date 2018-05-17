@@ -40,9 +40,13 @@ public class Main {
 		GNormal g1 = new GNormal(vertices);
 		GraphManager manager = new GraphManager();
 		
-		String bfs = manager.DFS(g1, v1);
-		System.out.println(bfs);
-	
+		Boolean connected = manager.connected(g1);
+		if(connected) {
+			System.out.println("123");
+		}else {
+			System.out.println("345");
+		}
+		
 	}
 
 }
