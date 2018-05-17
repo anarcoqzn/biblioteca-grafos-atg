@@ -9,12 +9,12 @@ public abstract class Graph {
 	
 	protected List<Vertex> vertices;
 	protected int verticesQuantity;
-	protected List<Edge> arestas;
+	protected List<Edge> edges;
 	
 	public Graph(int verticesQuantity) {
 		this.verticesQuantity = verticesQuantity;
 		this.vertices = new ArrayList<>(verticesQuantity);
-		this.arestas = new ArrayList<>();
+		this.edges = new ArrayList<>();
 	}
 	
 	public Vertex searchVertexById(String id) {
@@ -57,12 +57,11 @@ public abstract class Graph {
 		return vertices;
 	}
 	
-	public List<Edge> getArestas() {
-		return arestas;
+	public List<Edge> getEdges() {
+		return edges;
 	}
 	
 	public void addEdge(Edge edge) {
-		arestas.add(edge);
+		edges.add(edge);
 	}
-	
 }

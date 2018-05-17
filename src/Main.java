@@ -22,7 +22,7 @@ public class Main {
 		System.out.println(g2);
 		
 		//teste classe Edge
-		System.out.println(g2.getArestas());
+		System.out.println(g2.getEdges());
 
 		//testes shortestPath
 		Vertex v1 = g.searchVertexById("1");

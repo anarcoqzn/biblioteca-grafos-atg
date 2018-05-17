@@ -251,7 +251,7 @@ public class GraphManager implements GraphManageable {
 			int comprimento = graph.getVertexNumber();
 			
 			for (int i = 0; i < comprimento-1; i++) {
-				for (Edge aresta : graph.getArestas()) {
+				for (Edge aresta : graph.getEdges()) {
 					
 					if(aresta.getVertexInicial().getDistanciaMin() == Double.MAX_VALUE) continue;
 					
@@ -266,7 +266,7 @@ public class GraphManager implements GraphManageable {
 					}
 				}
 
-				for(Edge aresta : graph.getArestas()) {
+				for(Edge aresta : graph.getEdges()) {
 					if(aresta.getVertexInicial().getDistanciaMin() != Double.MAX_VALUE) {
 						//if(existeCiclo(arest)){
 						//	syso("Existe uma aresta negativa");
