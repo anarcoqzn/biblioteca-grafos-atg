@@ -7,9 +7,18 @@ public abstract class Vertex {
 	protected String id;
 	protected List<Vertex> connectedVertices;
 	protected boolean ink;
+	protected int depth;
 	
 	public String getId() {
 		return this.id;
+	}
+	
+	public int getDepth() {
+		return this.depth;
+	}
+	
+	public void setDepth(int depth) {
+		this.depth = depth; 
 	}
 
 	public boolean getInk() {
@@ -22,6 +31,10 @@ public abstract class Vertex {
 
 	public List<Vertex> getConnectedVertices(){
 		return this.connectedVertices;
+	}
+	
+	public void addConnectedVertex(Vertex v) {
+		this.connectedVertices.add(v);
 	}
 	
 	public int hashCode() {

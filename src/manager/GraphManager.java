@@ -1,6 +1,7 @@
 package manager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import model.graph.Graph;
@@ -48,24 +49,31 @@ public class GraphManager implements GraphManageable {
 	public String BFS(Graph graph, Vertex v) {
 		// faz uma busca em largura na arvore que é:  dado um vertice inicial é definido ele como o nivel 0 e sua representação e adiciona a string 
 		// depois, são vistos os vertices adjacentos (ou filhos)e feitos o mesmo só que aumento a sua "profundidade" em 1 até se percorrer a arvore por competo da raiz até as folhas. 
-		ArrayList<Vertex> caminho = new ArrayList<Vertex>();	//lista caminho onde se é colocado primeiramente o vertice inicial; 
-		int nivel = 0;
-		String retorno = v.getId() + " - " + nivel + " -\n";	//String que começa com a representação do vertice inicial que não possui vertice pai;
+		ArrayList<Vertex> caminho = new ArrayList<Vertex>();	//lista caminho onde se é colocado primeiramente o vertice inicial;
+		HashMap<String, String> rep = new HashMap<>();
+		v.setDepth(0);
+		String line = v.getId() + " - " + v.getDepth() + " -\n";	//String que começa com a representação do vertice inicial que não possui vertice pai;
 		v.setInk(true);
+		rep.put(v.getId(),line);
 		caminho.add(v);		//adiciona vetor inicial a lista caminho;
 		while (!caminho.isEmpty()){		// enquanto a lista caminho não estiver vazia;
 			List<Vertex> aux = caminho.get(0).getConnectedVertices();	//lista auxiliar que vai reter os vertices conectados ao vetice pai;
-			nivel++;
 			while(!aux.isEmpty()){		//enquanto a lista auxiliar ainda não estiver vazia; 
 				if(aux.get(0).getInk() == false) {
 					aux.get(0).setInk(true);
+					aux.get(0).setDepth(caminho.get(0).getDepth()+1);
 					caminho.add(aux.get(0));	//adiciona o vertice conectado a lista caminho;
-					retorno += aux.get(0).getId() + " - " + nivel + " " + caminho.get(0).getId() + "\n";	//adiciona a representação do vertice filho + nivel + vertice pai;
+					line = aux.get(0).getId() + " - " + aux.get(0).getDepth() + " " + caminho.get(0).getId() + "\n";	//adiciona a representação do vertice filho + nivel + vertice pai;
+					rep.put(aux.get(0).getId(), line);
 				}
 				aux.remove(0);	// remove vertice filho da lista auxiliar;
 			}
 			caminho.remove(0);	//remove vertice pai apos todos os seus vertices conectados serem adicionados a lista caminho;
 			
+		}
+		String retorno = "";
+		for(Vertex vertex : graph.getListofVertex()) {
+			retorno += rep.get(vertex.getId());
 		}
 		return retorno;
 	}
@@ -76,9 +84,11 @@ public class GraphManager implements GraphManageable {
 		//eu tive que criar uma variavel boolean ink em vertex porque na busca em profundidade é necessario fazer backtracking;
 		//e marcar quais vertices já foram contabilizados e um metodo boolean colored me grafo que retorno se todos os vertices do grafo foram coloridos na busca;
 		ArrayList<Vertex> caminho = new ArrayList<Vertex>();	// lista caminho onde é colocado os vertices ;
-		int nivel = 0;	// nivel da camada da busca;
-		String retorno = v.getId() + " - " + nivel + " -\n";	// String de retorno;
+		HashMap<String, String> rep = new HashMap<>();
+		v.setDepth(0);	// nivel da camada da busca;
+		String line = v.getId() + " - " + v.getDepth() + " -\n";	// String de retorno;
 		v.setInk(true);	// pinta o vertice para que ele seja reconhecido como já contabilizado na busca;
+		rep.put(v.getId(),line);
 		caminho.add(v);	// adiciona v a caminho;
 		while(!graph.isColored()) {	// enquanto ainda existir vertices descoloridos no grafico; 
 			List<Vertex> aux = caminho.get(caminho.size()-1).getConnectedVertices();	// se pega uma lista dos vertices adjacentes;
@@ -87,16 +97,20 @@ public class GraphManager implements GraphManageable {
 				if(aux.get(i).getInk() == false) {	// caso encontre;
 					colored = true; 	// coloriu é verdadeiro;
 					aux.get(i).setInk(true);	//colore o vertice;
+					aux.get(i).setDepth(caminho.get(caminho.size()-1).getDepth()+1);
 					caminho.add(aux.get(i));	//adiciona o vertice a caminho;
-					nivel++;	// aumenta o nivel;
-					retorno += aux.get(i).getId() + " - " + nivel + " " + caminho.get(caminho.size()-2).getId() + "\n";	// adiciona a sua representação a String retorno;
+					line = aux.get(i).getId() + " - " + aux.get(i).getDepth() + " " + caminho.get(caminho.size()-2).getId() + "\n";	// adiciona a sua representação a String retorno;
+					rep.put(aux.get(i).getId(), line);
+					break;
 				}
 			}
 			if(colored == false) {	// Caso ele não encontre um vertice adjacente descolorido;
-				caminho.remove(caminho.size()-1);	//faz o back tracking , remove o ultimo vertice da lista e retorna ao pai para verificar se ele ainda não tem outro filho descolorido;
-				nivel--; 	// diminui o nivel;
+				caminho.remove(caminho.size()-1);	//faz o back tracking , remove o ultimo vertice da lista e retorna ao pai para verificar se ele ainda não tem outro filho descolorido;			}
 			}
-			
+		}
+		String retorno = "";
+		for(Vertex vertex : graph.getListofVertex()) {
+			retorno += rep.get(vertex.getId());
 		}
 		return retorno;
 	}

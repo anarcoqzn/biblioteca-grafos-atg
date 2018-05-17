@@ -21,7 +21,7 @@ public abstract class Graph {
 		return true;
 	}
 	
-	public List getListofVertex() {
+	public List<Vertex> getListofVertex() {
 		return graph;
 	}
 	
