@@ -12,16 +12,16 @@ public class VWeighted extends Vertex{
 		this.edgeWeights = new ArrayList<>();
 	}
 	
-	public List<Float> getEdgeWeights() {
-		return edgeWeights;
-	}
-	
 	public void connectTo(Vertex vertex, Float weight) {
 		this.connectedVertices.add(vertex);
 		this.edgeWeights.add(weight);
 		
 		vertex.connectedVertices.add(this);
 		((VWeighted) vertex).edgeWeights.add(weight); 
+	}
+	
+	public List<Float> getEdgeWeights() {
+		return edgeWeights;
 	}
 	
 	public Float getConnectionWeight(Vertex vertex) {

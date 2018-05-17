@@ -16,6 +16,8 @@ import model.vertex.Vertex;
 
 public class GraphManager implements GraphManageable {
 	
+	//private int quantidadeVertices;
+	
 	@Override
 	public Graph readGraph(String path){
 		
@@ -30,7 +32,8 @@ public class GraphManager implements GraphManageable {
 			quantidadeVertices = Integer.parseInt(ler.readLine());
 			primeiraLinha = ler.readLine();
 			graph = new GNormal(quantidadeVertices);
-					
+			
+			System.out.println("----------execucao readGraph----------");
 			System.out.println("Quantidade de vertices: " + quantidadeVertices);
 					
 			do {
@@ -84,7 +87,7 @@ public class GraphManager implements GraphManageable {
 		           
 			e.printStackTrace();  
 		}  
-				
+		System.out.println("-------fim da execucao readGraph------");	
 		return graph;
 	}
 	
@@ -229,8 +232,20 @@ public class GraphManager implements GraphManageable {
 	}
 
 	@Override
-	public String shortestPath(Vertex v1, Vertex v2) {
-		// TODO Auto-generated method stub
+	public String shortestPath(Graph graph, Vertex v1, Vertex v2) {
+		if(v1 instanceof VNormal && v2 instanceof VNormal) {
+			
+			System.out.println("vertice normal");
+			
+		}else if(v1 instanceof VWeighted && v2 instanceof VWeighted) {
+			
+			v1.setDistanciaMin(0);
+			
+			//int comprimento = quantidadeVertices;
+			
+			System.out.println("vertice ponderado");
+ 			
+		}
 		return null;
 	}
 

@@ -9,6 +9,8 @@ public abstract class Vertex {
 	protected List<Vertex> connectedVertices;
 	protected boolean ink;
 	
+	private double distanciaMin = Double.MAX_VALUE;
+	
 	public Vertex(String id) {
 		this.id = id;
 		connectedVertices = new ArrayList<>();
@@ -47,5 +49,13 @@ public abstract class Vertex {
 	@Override
 	public String toString() {
 		return getId();
+	}
+
+	public double getDistanciaMin() {
+		return distanciaMin;
+	}
+
+	public void setDistanciaMin(double distanciaMin) {
+		this.distanciaMin = distanciaMin;
 	}
 }
