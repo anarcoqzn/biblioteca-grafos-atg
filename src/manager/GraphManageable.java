@@ -26,7 +26,7 @@ public interface GraphManageable {
 	public String DFS(Graph graph,Vertex v);
 	
 	public boolean connected(Graph graph);
-	public String shortestPath(Vertex v1, Vertex v2);
+	public String shortestPath(Graph graph, Vertex v1, Vertex v2);
 	
 	public String mst(Graph graph); 
 }

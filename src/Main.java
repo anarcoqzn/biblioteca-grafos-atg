@@ -5,6 +5,7 @@ import java.io.IOException;
 import manager.GraphManageable;
 import manager.GraphManager;
 import model.graph.Graph;
+import model.vertex.Vertex; //
 
 public class Main {
 
@@ -19,6 +20,14 @@ public class Main {
 		Graph g2 = manager.readGraph("resources/simpleGraph.txt");
 		
 		System.out.println(g2);
+		
+		//teste classe Edge
+		System.out.println(g2.getArestas());
+
+		//testes shortestPath
+		Vertex v1 = g.searchVertexById("1");
+		Vertex v2 = g.searchVertexById("5");
+		manager.shortestPath(g, v1, v2);
 		
 	}
 }

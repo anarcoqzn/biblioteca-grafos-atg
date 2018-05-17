@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.edge.Edge;
+import model.edge.EdgeNormal;
+import model.edge.EdgeWeighted;
 import model.graph.GNormal;
 import model.graph.GWeighted;
 import model.graph.Graph;
@@ -15,6 +18,8 @@ import model.vertex.VWeighted;
 import model.vertex.Vertex;
 
 public class GraphManager implements GraphManageable {
+	
+	//private int quantidadeVertices;
 	
 	@Override
 	public Graph readGraph(String path){
@@ -30,7 +35,8 @@ public class GraphManager implements GraphManageable {
 			quantidadeVertices = Integer.parseInt(ler.readLine());
 			primeiraLinha = ler.readLine();
 			graph = new GNormal(quantidadeVertices);
-					
+			
+			System.out.println("----------execucao readGraph----------");
 			System.out.println("Quantidade de vertices: " + quantidadeVertices);
 					
 			do {
@@ -67,6 +73,8 @@ public class GraphManager implements GraphManageable {
 					graph.addVertex(vertice1);
 					graph.addVertex(vertice2);
 				}
+				
+				graph.addEdge(new EdgeNormal(vertice1, vertice2)); //classe Edge
 						
 				System.out.println("Arestas : " + quantidadeVertice[0]+ "->" + quantidadeVertice[1]);
 				
@@ -84,7 +92,7 @@ public class GraphManager implements GraphManageable {
 		           
 			e.printStackTrace();  
 		}  
-				
+		System.out.println("-------fim da execucao readGraph------");	
 		return graph;
 	}
 	
@@ -130,7 +138,8 @@ public class GraphManager implements GraphManageable {
 	                	firstVertex.connectTo(secondVertex, weight);
 	                	graph.addVertex(firstVertex);
 	                	graph.addVertex(secondVertex);
-	                }   
+	                } 
+	                graph.addEdge(new EdgeWeighted(firstVertex, secondVertex, weight)); //classe Edge
 	                line1 = reader.readLine();
 	                               
 	        }while(line1 != null);
@@ -229,8 +238,52 @@ public class GraphManager implements GraphManageable {
 	}
 
 	@Override
-	public String shortestPath(Vertex v1, Vertex v2) {
-		// TODO Auto-generated method stub
+	public String shortestPath(Graph graph, Vertex v1, Vertex v2) {
+		
+		//Grafo Normal
+		if(graph instanceof GNormal && v1 instanceof VNormal && v2 instanceof VNormal) {
+			System.out.println("grafo normal"); //apenas p teste
+		
+		//Grafo Ponderado
+		}else if(graph instanceof GWeighted && v1 instanceof VWeighted && v2 instanceof VWeighted) {
+			System.out.println("grafo ponderado"); //apenas p teste
+			v1.setDistanciaMin(0);
+			int comprimento = graph.getVertexNumber();
+			
+			for (int i = 0; i < comprimento-1; i++) {
+				for (Edge aresta : graph.getArestas()) {
+					
+					if(aresta.getVertexInicial().getDistanciaMin() == Double.MAX_VALUE) continue;
+					
+					Vertex v = aresta.getVertexInicial();
+					Vertex u = aresta.getVertexFinal();
+					
+					double novaDistancia = v.getDistanciaMin() + ((EdgeWeighted)aresta).getPeso();
+					
+					if(novaDistancia < u.getDistanciaMin()) {
+						u.setDistanciaMin(novaDistancia);
+						u.setVertexAnterior(v);
+					}
+				}
+
+				for(Edge aresta : graph.getArestas()) {
+					if(aresta.getVertexInicial().getDistanciaMin() != Double.MAX_VALUE) {
+						//if(existeCiclo(arest)){
+						//	syso("Existe uma aresta negativa");
+						//	return;
+						//}
+					}
+					
+					if(v2.getDistanciaMin() == Double.MAX_VALUE) {
+						System.out.println("Nao existe um caminho para o destino");
+						break;
+					}else {
+						System.out.println("O menor caminho eh: "+v2.getDistanciaMin());
+						break;
+					}
+				}
+			}
+		}
 		return null;
 	}
 
