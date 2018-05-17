@@ -3,15 +3,18 @@ package model.graph;
 import java.util.ArrayList;
 import java.util.List;
 import model.vertex.*;
+import model.edge.*;
 
 public abstract class Graph {
 	
 	protected List<Vertex> vertices;
 	protected int verticesQuantity;
+	protected List<Edge> arestas;
 	
 	public Graph(int verticesQuantity) {
 		this.verticesQuantity = verticesQuantity;
 		this.vertices = new ArrayList<>(verticesQuantity);
+		this.arestas = new ArrayList<>();
 	}
 	
 	public Vertex searchVertexById(String id) {
@@ -45,8 +48,21 @@ public abstract class Graph {
 		}
 		return true;
 	}
+	
 	public int getVertexNumber() {
 		return vertices.size();
-		
 	}
+	
+	public List<Vertex> getVertices() {
+		return vertices;
+	}
+	
+	public List<Edge> getArestas() {
+		return arestas;
+	}
+	
+	public void addEdge(Edge edge) {
+		arestas.add(edge);
+	}
+	
 }

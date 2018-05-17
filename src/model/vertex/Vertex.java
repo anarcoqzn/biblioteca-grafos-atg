@@ -10,6 +10,7 @@ public abstract class Vertex {
 	protected boolean ink;
 	
 	private double distanciaMin = Double.MAX_VALUE;
+	protected Vertex vertexAnterior;
 	
 	public Vertex(String id) {
 		this.id = id;
@@ -57,5 +58,13 @@ public abstract class Vertex {
 
 	public void setDistanciaMin(double distanciaMin) {
 		this.distanciaMin = distanciaMin;
+	}
+	
+	public Vertex getVertexAnterior() {
+		return vertexAnterior;
+	}
+
+	public void setVertexAnterior(Vertex vertexAnterior) {
+		this.vertexAnterior = vertexAnterior;
 	}
 }
