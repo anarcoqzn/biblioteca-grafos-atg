@@ -52,8 +52,8 @@ public class Main {
 		g1.addVertex(vv4);
 		g1.addVertex(vv5);
 		
-		String bfs = manager.BFS(g1, v1);
-		String dfs = manager.DFS(g1, v1);
+		String bfs = manager.BFS(g1, vv1);
+		String dfs = manager.DFS(g1, vv1);
 		
 		System.out.println(bfs);
 		System.out.println(dfs);
