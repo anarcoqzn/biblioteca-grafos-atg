@@ -164,7 +164,10 @@ public class GraphManager implements GraphManageable {
 
 	@Override
 	public float getMeanEdge(Graph graph) {
-		return (2*graph.getEdges().size())/graph.getVertexNumber();
+		float edgeNumber = graph.getEdges().size();
+		float verticesNumber = graph.getVertexNumber();
+		
+		return (2*edgeNumber)/verticesNumber;
 	}
 
 	@Override

@@ -29,5 +29,7 @@ public class Main {
 		Vertex v2 = g.searchVertexById("5");
 		manager.shortestPath(g, v1, v2);
 		
+		System.out.println(manager.getMeanEdge(g));
+		
 	}
 }
