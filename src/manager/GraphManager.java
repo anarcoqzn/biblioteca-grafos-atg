@@ -29,9 +29,11 @@ public class GraphManager implements GraphManageable {
 		try {
 					
 			read = new BufferedReader(new FileReader(path));
+			
 			quantityVertex = Integer.parseInt(read.readLine());
 			firstLine = read.readLine();
 			graph = new GNormal(quantityVertex);
+			
 			
 			do {
 					
@@ -155,18 +157,91 @@ public class GraphManager implements GraphManageable {
 
 	@Override
 	public float getMeanEdge(Graph graph) {
-		float edgeNumber = graph.getEdges().size();
-		float verticesNumber = graph.getVertexNumber();
+		float edgeNumber = getEdgeNumber(graph);
+		float verticesNumber = getVertexNumber(graph);
 		
 		return (2*edgeNumber)/verticesNumber;
 	}
 
 	@Override
 	public String graphRepresentation(Graph graph, String type) {
-		// TODO Auto-generated method stub
-		return null;
+		if(type == "AL") return adjacencyList(graph);
+		else if(type == "AM") return adjacencyMatrix(graph);
+		else return "Tipo de representação não existente";
+	}
+	
+	private String adjacencyMatrix(Graph graph) {
+		
+		String saida = "";
+		int matrixSize = graph.getVertexNumber() + 1;
+		String[][] matrix = new String[matrixSize][matrixSize];
+		
+		for(int i = 0; i < matrixSize; i++) {
+			if (i == 0)	matrix[0][i] = " ";
+			else matrix[0][i] = graph.getVertices().get(i-1).getId();
+		}
+		
+		for(int i = 0; i < matrixSize; i++) {
+			if (i == 0)	matrix[i][0] = " ";
+			else matrix[i][0] = graph.getVertices().get(i-1).getId();
+		}
+		if(graph instanceof GNormal) {
+			for(int i = 1; i < matrixSize; i++) {
+				VNormal current = (VNormal) graph.getVertices().get(i-1); 
+
+				for(int j = 1; j < matrixSize; j++) {
+					VNormal current2 = (VNormal) graph.getVertices().get(j-1);
+					
+					if(current.getConnectedVertices().contains(current2)) matrix[i][j] = "1";
+					else matrix[i][j] = "0";
+				}
+			}
+		}else if(graph instanceof GWeighted){
+			for(int i = 1; i < matrixSize; i++) {
+				VWeighted current = (VWeighted) graph.getVertices().get(i-1); 
+				for(int j = 1; j < matrixSize; j++) {
+					VWeighted current2 = (VWeighted) graph.getVertices().get(j-1);
+					
+					if(current.getConnectedVertices().contains(current2))	matrix[i][j] = current.getConnectionWeight(current2).toString();
+					else matrix[i][j] = "0";
+				}
+			}
+		}
+		
+		for(int i = 0; i < matrixSize; i++) {
+			for(int j = 0; j < matrixSize; j++) {
+				saida += matrix[i][j] + " ";
+			}
+			saida += "\n";
+		}
+		
+		return saida;
 	}
 
+	private String adjacencyList(Graph graph) {
+		String result = "";
+		
+		if(graph instanceof GNormal) {
+			for(Vertex v : graph.getVertices()) {
+				result += v.getId() + " - ";
+				for(Vertex v2 : v.getConnectedVertices()) {
+					result += v2.getId() + " ";
+				}
+				result += "\n";
+			}
+			
+		}else if(graph instanceof GWeighted) {
+			for(Vertex v : graph.getVertices()) {
+				result += v.getId() + " - ";
+				for(Vertex v2 : v.getConnectedVertices()) {
+					result += v2.getId() + "(" +((VWeighted)v).getConnectionWeight(v2)+")" + " ";
+				}
+				result += "\n";
+			}
+		}
+		return result;
+	}
+	
 	@Override
 	public String BFS(Graph graph, Vertex v) {
 		ArrayList<Vertex> way = new ArrayList<Vertex>();	
@@ -267,16 +342,17 @@ public class GraphManager implements GraphManageable {
 		//Grafo Ponderado
 		}else if(graph instanceof GWeighted && vertex1 instanceof VWeighted && vertex2 instanceof VWeighted) {
 			System.out.println("grafo ponderado"); //apenas p teste
+
 			vertex1.setDistanciaMin(0);
 			int lenght = graph.getVertexNumber();
 			
 			for (int i = 0; i < lenght-1; i++) {
 				for (Edge edge : graph.getEdges()) {
 					
-					if(edge.getVertexInicial().getDistanciaMin() == Double.MAX_VALUE) continue;
+					if(edge.getInitialVertex().getDistanciaMin() == Double.MAX_VALUE) continue;
 					
-					Vertex v = edge.getVertexInicial();
-					Vertex u = edge.getVertexFinal();
+					Vertex v = edge.getInitialVertex();
+					Vertex u = edge.getFinalVertex();
 					
 					double novaDistancia = v.getDistanciaMin() + ((EdgeWeighted)edge).getWeight();
 					
@@ -287,7 +363,7 @@ public class GraphManager implements GraphManageable {
 				}
 
 				for(Edge aresta : graph.getEdges()) {
-					if(aresta.getVertexInicial().getDistanciaMin() != Double.MAX_VALUE) {
+					if(aresta.getInitialVertex().getDistanciaMin() != Double.MAX_VALUE) {
 						//if(existeCiclo(arest)){
 						//	syso("Existe uma aresta negativa");
 						//	return;

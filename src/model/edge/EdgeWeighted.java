@@ -6,8 +6,9 @@ public class EdgeWeighted extends Edge{
 
 	protected double weight;
 	
-	public EdgeWeighted(Vertex vertexInitial, Vertex vertexFinal, double weight) {
-		super(vertexInitial, vertexFinal);
+
+	public EdgeWeighted(Vertex initialVertex, Vertex finalVertex, double weight) {
+		super(initialVertex, finalVertex);
 		this.weight = weight;
 	}
 
@@ -18,5 +19,4 @@ public class EdgeWeighted extends Edge{
 	public void setWeight(double weight) {
 		this.weight = weight;
 	}
-
 }

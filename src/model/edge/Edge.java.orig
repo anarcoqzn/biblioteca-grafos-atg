@@ -4,6 +4,22 @@ import model.vertex.Vertex;
 
 public abstract class Edge {
 	
+<<<<<<< HEAD
+	protected Vertex vertexInitial;
+	protected Vertex vertexFinal;
+	
+	public Edge(Vertex vi, Vertex vf) {
+		this.vertexInitial = vi;
+		this.vertexFinal = vf;
+	}
+
+	public Vertex getVertexInicial() {
+		return vertexInitial;
+	}
+
+	public void setVertexInicial(Vertex verticeInicial) {
+		this.vertexInitial = verticeInicial;
+=======
 	protected Vertex initialVertex;
 	protected Vertex finalVertex;
 	
@@ -18,6 +34,7 @@ public abstract class Edge {
 
 	public void setInitialVertex(Vertex initialVertex) {
 		this.initialVertex = initialVertex;
+>>>>>>> 18224ba52d1b5951529db4feabb5f4bcb9eab40e
 	}
 
 	public Vertex getFinalVertex() {
@@ -32,10 +49,13 @@ public abstract class Edge {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-
+<<<<<<< HEAD
+		result = prime * result + ((vertexFinal == null) ? 0 : vertexFinal.hashCode());
+		result = prime * result + ((vertexInitial == null) ? 0 : vertexInitial.hashCode());
+=======
 		result = prime * result + ((finalVertex == null) ? 0 : finalVertex.hashCode());
 		result = prime * result + ((initialVertex == null) ? 0 : initialVertex.hashCode());
-
+>>>>>>> 18224ba52d1b5951529db4feabb5f4bcb9eab40e
 		return result;
 	}
 
@@ -53,20 +73,28 @@ public abstract class Edge {
 				return false;
 		} else if (!finalVertex.equals(other.finalVertex))
 			return false;
-
+<<<<<<< HEAD
+		if (vertexInitial == null) {
+			if (other.vertexInitial != null)
+				return false;
+		} else if (!vertexInitial.equals(other.vertexInitial))
+=======
 		if (initialVertex == null) {
 			if (other.initialVertex != null)
 				return false;
 		} else if (!initialVertex.equals(other.initialVertex))
+>>>>>>> 18224ba52d1b5951529db4feabb5f4bcb9eab40e
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-
+<<<<<<< HEAD
+		return vertexInitial + " -> " + vertexFinal;
+=======
 		return initialVertex + " -> " + finalVertex;
-
+>>>>>>> 18224ba52d1b5951529db4feabb5f4bcb9eab40e
 	}
 	
 }

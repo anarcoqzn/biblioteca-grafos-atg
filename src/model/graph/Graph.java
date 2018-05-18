@@ -8,19 +8,19 @@ import model.edge.*;
 public abstract class Graph {
 	
 	protected List<Vertex> vertices;
-	protected int verticesQuantity;
+	protected int vertexQuantity;
 	protected List<Edge> edges;
 	
 	public Graph(int verticesQuantity) {
-		this.verticesQuantity = verticesQuantity;
+		this.vertexQuantity = verticesQuantity;
 		this.vertices = new ArrayList<>(verticesQuantity);
 		this.edges = new ArrayList<>();
 	}
 	
 	public Vertex searchVertexById(String id) {
 		
-		for(Vertex v: vertices) {
-			if(v.getId().equals(id)) return v;
+		for(Vertex vertex: vertices) {
+			if(vertex.getId().equals(id)) return vertex;
 		}
 		return null;
 	}

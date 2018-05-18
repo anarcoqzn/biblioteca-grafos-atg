@@ -4,8 +4,8 @@ import model.vertex.Vertex;
 
 public class EdgeNormal extends Edge {
 
-	public EdgeNormal(Vertex vertexInitial, Vertex vertexFinal) {
-		super(vertexInitial, vertexFinal);
+	public EdgeNormal(Vertex initialVertex, Vertex finalVertex) {
+		super(initialVertex, finalVertex);
 	}
 
 }
