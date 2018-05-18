@@ -10,9 +10,9 @@ public class GNormal extends Graph{
 		super(verticesQuantity);
 	}
 	
-	public void addConnection(Vertex v1, Vertex v2) {
-		if(searchVertexById(v1.getId()) != null && searchVertexById(v2.getId()) != null) {
-			((VNormal) v1).connectTo(v2);
+	public void addConnection(Vertex vertex1, Vertex vertex2) {
+		if(searchVertexById(vertex1.getId()) != null && searchVertexById(vertex2.getId()) != null) {
+			((VNormal) vertex1).connectTo(vertex2);
 		}
 	}
 }

@@ -35,10 +35,16 @@ public class Main {
 		manager.shortestPath(g, v1, v2);
 		
 		System.out.println(g2);
+		
+		
 		int g3 = manager.getEdgeNumber(manager.readGraph("resources/weightedGraph.txt"));
-		System.out.println(manager.getMeanEdge(g));
+		//System.out.println(manager.getMeanEdge(g));
 		
 		System.out.println("Número de arestas --> " + g3);
+		
+		
+		int g4 = manager.getVertexNumber(manager.readGraph("resources/simpleGraph.txt"));
+		System.out.println("Número do vertices --> " + g4);
 			
 		// testes bfs,dfs,connected
 		

@@ -4,20 +4,20 @@ import model.vertex.Vertex;
 
 public abstract class Edge {
 	
-	protected Vertex vertexInicial;
+	protected Vertex vertexInitial;
 	protected Vertex vertexFinal;
 	
 	public Edge(Vertex vi, Vertex vf) {
-		this.vertexInicial = vi;
+		this.vertexInitial = vi;
 		this.vertexFinal = vf;
 	}
 
 	public Vertex getVertexInicial() {
-		return vertexInicial;
+		return vertexInitial;
 	}
 
 	public void setVertexInicial(Vertex verticeInicial) {
-		this.vertexInicial = verticeInicial;
+		this.vertexInitial = verticeInicial;
 	}
 
 	public Vertex getVertexFinal() {
@@ -33,7 +33,7 @@ public abstract class Edge {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((vertexFinal == null) ? 0 : vertexFinal.hashCode());
-		result = prime * result + ((vertexInicial == null) ? 0 : vertexInicial.hashCode());
+		result = prime * result + ((vertexInitial == null) ? 0 : vertexInitial.hashCode());
 		return result;
 	}
 
@@ -51,17 +51,17 @@ public abstract class Edge {
 				return false;
 		} else if (!vertexFinal.equals(other.vertexFinal))
 			return false;
-		if (vertexInicial == null) {
-			if (other.vertexInicial != null)
+		if (vertexInitial == null) {
+			if (other.vertexInitial != null)
 				return false;
-		} else if (!vertexInicial.equals(other.vertexInicial))
+		} else if (!vertexInitial.equals(other.vertexInitial))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return vertexInicial + " -> " + vertexFinal;
+		return vertexInitial + " -> " + vertexFinal;
 	}
 	
 }
