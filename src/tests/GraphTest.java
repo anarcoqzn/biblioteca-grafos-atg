@@ -1,6 +1,6 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.*;
 
@@ -11,7 +11,7 @@ import model.vertex.Vertex;
 
 public class GraphTest {
 	int vertexNumber;
-	Graph graph;
+	GNormal graph;
 	Graph emptyG;
 
 	@Before
@@ -22,8 +22,13 @@ public class GraphTest {
 
 	@Test
 	public void VertexTest() {
-		Vertex vertex = new VNormal("id1");
+		Vertex vertex = new VNormal("1");
 		this.graph.addVertex(vertex);
 		assertEquals(1, graph.getVertexNumber());
+		
+		vertex = new VNormal("2");
+		graph.addVertex(vertex);
+		graph.addConnection((VNormal)graph.searchVertexById("1"), (VNormal) graph.searchVertexById("2"));
+		assertEquals(2,graph.getVertexNumber());
 	}
 }

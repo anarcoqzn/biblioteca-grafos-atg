@@ -8,9 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import model.edge.Edge;
-import model.edge.EdgeNormal;
-import model.edge.EdgeWeighted;
+import model.edge.*;
 import model.graph.GNormal;
 import model.graph.GWeighted;
 import model.graph.Graph;
@@ -19,8 +17,6 @@ import model.vertex.VWeighted;
 import model.vertex.Vertex;
 
 public class GraphManager implements GraphManageable {
-	
-	//private int quantidadeVertices;
 	
 	@Override
 	public Graph readGraph(String path){
@@ -37,9 +33,6 @@ public class GraphManager implements GraphManageable {
 			primeiraLinha = ler.readLine();
 			graph = new GNormal(quantidadeVertices);
 			
-			System.out.println("----------execucao readGraph----------");
-			System.out.println("Quantidade de vertices: " + quantidadeVertices);
-					
 			do {
 					
 				String[] quantidadeVertice = primeiraLinha.split(" ");
@@ -77,8 +70,6 @@ public class GraphManager implements GraphManageable {
 				
 				graph.addEdge(new EdgeNormal(vertice1, vertice2)); //classe Edge
 						
-				System.out.println("Arestas : " + quantidadeVertice[0]+ "->" + quantidadeVertice[1]);
-				
 				primeiraLinha = ler.readLine();
 		 			
 				}while(primeiraLinha!= null);
@@ -93,7 +84,7 @@ public class GraphManager implements GraphManageable {
 		           
 			e.printStackTrace();  
 		}  
-		System.out.println("-------fim da execucao readGraph------");	
+				
 		return graph;
 	}
 	
@@ -139,8 +130,8 @@ public class GraphManager implements GraphManageable {
 	                	firstVertex.connectTo(secondVertex, weight);
 	                	graph.addVertex(firstVertex);
 	                	graph.addVertex(secondVertex);
-	                } 
-	                graph.addEdge(new EdgeWeighted(firstVertex, secondVertex, weight)); //classe Edge
+	                }   
+	                graph.addEdge(new EdgeWeighted(firstVertex, secondVertex, weight));//classe Edge
 	                line1 = reader.readLine();
 	                               
 	        }while(line1 != null);
@@ -348,7 +339,4 @@ public class GraphManager implements GraphManageable {
 		}
 		return false;
 	}
-	
-	
-	
 }

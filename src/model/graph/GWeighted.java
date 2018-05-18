@@ -1,6 +1,7 @@
 package model.graph;
 
 import model.vertex.VWeighted;
+import model.vertex.Vertex;
 
 public class GWeighted extends Graph{
 	
@@ -8,11 +9,10 @@ public class GWeighted extends Graph{
 		super(verticesQuantity);
 	}
 	
-	public void addConnection(VWeighted vertex1, VWeighted vertex2, Float weight) {
-		this.vertices.add(vertex1);
-		this.vertices.add(vertex2);
-		
-		vertex1.connectTo(vertex2, weight);
+	public void addConnection(Vertex v1, Vertex v2, Float weight) {
+		if(searchVertexById(v1.getId()) != null && searchVertexById(v2.getId()) != null) {
+			((VWeighted) v1).connectTo(v2, weight);
+		}
 	}
 	
 	public String toString() {

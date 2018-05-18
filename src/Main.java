@@ -17,7 +17,8 @@ public class Main {
 		
 		Graph g = manager.readWeightedGraph("resources/weightedGraph.txt");
 		
-		System.out.println(g);
+		System.out.println("Grafo com pesos" + "\n");
+		System.out.println(g + "\n");
 				
 		Graph g2 = manager.readGraph("resources/simpleGraph.txt");
 		
@@ -26,13 +27,19 @@ public class Main {
 		//teste classe Edge
 		System.out.println(g2.getEdges());
 
+		System.out.println("Grafo normal" + "\n");
+		System.out.println(g2 + "\n");
 		//testes shortestPath
 		Vertex v1 = g.searchVertexById("1");
 		Vertex v2 = g.searchVertexById("5");
 		manager.shortestPath(g, v1, v2);
 		
+		System.out.println(g2);
+		int g3 = manager.getEdgeNumber(manager.readGraph("resources/weightedGraph.txt"));
 		System.out.println(manager.getMeanEdge(g));
 		
+		System.out.println("Número de arestas --> " + g3);
+			
 		// testes bfs,dfs,connected
 		
 		VNormal vv1 = new VNormal("1");
