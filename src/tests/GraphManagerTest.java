@@ -143,20 +143,4 @@ public class GraphManagerTest {
 		assertEquals(true,connected);
 	}
 	
-	@Test 
-	public void conectedTest() {
-		
-	}
-	
-	@Test
-	public void shortestPath() {
-		
-	}
-	
-	@Test
-	public void mstTest() {
-		
-	}
-	
-
 }
