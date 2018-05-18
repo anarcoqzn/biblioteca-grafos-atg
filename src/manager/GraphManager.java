@@ -243,7 +243,7 @@ public class GraphManager implements GraphManageable {
 		ArrayList<Vertex> way = new ArrayList<Vertex>();	
 		HashMap<String, String> rep = new HashMap<>();
 		v.setDepth(0);
-		String line = v.getId() + " - " + v.getDepth() + " -\n";	
+		String line = v.getId() + " - " + v.getDepth();	
 		v.setInk(true);
 		rep.put(v.getId(),line);
 		way.add(v);		
@@ -257,7 +257,7 @@ public class GraphManager implements GraphManageable {
 					aux.get(0).setInk(true);
 					aux.get(0).setDepth(way.get(0).getDepth()+1);
 					way.add(aux.get(0));	
-					line = aux.get(0).getId() + " - " + aux.get(0).getDepth() + " " + way.get(0).getId() + "\n";	
+					line = "\n" + aux.get(0).getId() + " - " + aux.get(0).getDepth() + " " + way.get(0).getId() + "\n";	
 					rep.put(aux.get(0).getId(), line);
 				}
 				aux.remove(0);	
@@ -279,7 +279,7 @@ public class GraphManager implements GraphManageable {
 		ArrayList<Vertex> way = new ArrayList<Vertex>();	
 		HashMap<String, String> rep = new HashMap<>();
 		v.setDepth(0);	
-		String line = v.getId() + " - " + v.getDepth() + " -\n";	
+		String line = v.getId() + " - " + v.getDepth();	
 		v.setInk(true);	
 		rep.put(v.getId(),line);
 		way.add(v);
@@ -295,7 +295,7 @@ public class GraphManager implements GraphManageable {
 					aux.get(i).setInk(true);	
 					aux.get(i).setDepth(way.get(way.size()-1).getDepth()+1);
 					way.add(aux.get(i));	
-					line = aux.get(i).getId() + " - " + aux.get(i).getDepth() + " " + way.get(way.size()-2).getId() + "\n";	
+					line = "\n" + aux.get(i).getId() + " - " + aux.get(i).getDepth() + " " + way.get(way.size()-2).getId() + "\n";	
 					rep.put(aux.get(i).getId(), line);
 					break;
 				}
