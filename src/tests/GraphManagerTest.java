@@ -109,7 +109,13 @@ public class GraphManagerTest {
 	@Test
 	public void dfsGNormalTest(){
 		String dfs = manager.DFS(g1, v1);
-		assertEquals("1 - 0 -\n2 - 1 1\n3 - 3 5,4 - 3 5\n5 - 2 2",dfs);
+		assertEquals("1 - 0 -\n2 - 1 1\n3 - 3 5\n4 - 3 5\n5 - 2 2",dfs);
+	}
+	
+	@Test
+	public void connectedTest() {
+		boolean connected = manager.connected(g1);
+		assertEquals(true,connected);
 	}
 
 }
