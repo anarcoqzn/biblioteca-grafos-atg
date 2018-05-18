@@ -1,6 +1,8 @@
 
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import manager.GraphManageable;
 import manager.GraphManager;
@@ -71,7 +73,11 @@ public class Main {
 			System.out.println("é desconexo");
 		}*/
 		
-		System.out.println(manager.graphRepresentation(g2,""));
+		List<Vertex> path = new ArrayList<>();
+		List<List<Vertex>> path2 = new ArrayList<>();
+		Vertex v1 = g.searchVertexById("1");
+		Vertex v2 = g.searchVertexById("5");
+		System.out.println(manager.shortestPath(g, v1, v2));
 		
 	}
 }

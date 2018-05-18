@@ -9,12 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import model.edge.*;
-import model.graph.GNormal;
-import model.graph.GWeighted;
-import model.graph.Graph;
-import model.vertex.VNormal;
-import model.vertex.VWeighted;
-import model.vertex.Vertex;
+import model.graph.*;
+import model.vertex.*;
 
 public class GraphManager implements GraphManageable {
 	
@@ -332,52 +328,26 @@ public class GraphManager implements GraphManageable {
 
 	@Override
 	public String shortestPath(Graph graph, Vertex v1, Vertex v2) {
-		
-		//Grafo Normal
-		if(graph instanceof GNormal && v1 instanceof VNormal && v2 instanceof VNormal) {
-			System.out.println("grafo normal"); //apenas p teste
-		
-		//Grafo Ponderado
-		}else if(graph instanceof GWeighted && v1 instanceof VWeighted && v2 instanceof VWeighted) {
-			System.out.println("grafo ponderado"); //apenas p teste
-			v1.setDistanciaMin(0);
-			int length = graph.getVertexNumber();
+		String result = "";
+		List<Vertex> vertices = graph.getVertices();
+		List<List<Vertex>> ways = allWays(v1, v2, new ArrayList<>(), new ArrayList<>());
+		if(vertices.contains(v1) && vertices.contains(v2)) {
+			int index = 0;
+			int smaller = Integer.MAX_VALUE;
+			List<Vertex> smallerArray = new ArrayList<>();
 			
-			for (int i = 0; i < length-1; i++) {
-				for (Edge edge : graph.getEdges()) {
-					
-					if(edge.getInitialVertex().getDistanciaMin() == Double.MAX_VALUE) continue;
-					
-					Vertex v = edge.getInitialVertex();
-					Vertex u = edge.getFinalVertex();
-					
-					double novaDistancia = v.getDistanciaMin() + ((EdgeWeighted)edge).getWeight();
-					
-					if(novaDistancia < u.getDistanciaMin()) {
-						u.setDistanciaMin(novaDistancia);
-						u.setVertexAnterior(v);
-					}
-				}
-
-				for(Edge aresta : graph.getEdges()) {
-					if(aresta.getInitialVertex().getDistanciaMin() != Double.MAX_VALUE) {
-						//if(existeCiclo(arest)){
-						//	syso("Existe uma aresta negativa");
-						//	return;
-						//}
-					}
-					
-					if(v2.getDistanciaMin() == Double.MAX_VALUE) {
-						System.out.println("Nao existe um caminho para o destino");
-						break;
-					}else {
-						System.out.println("O menor caminho eh: "+v2.getDistanciaMin());
-						break;
-					}
+			for(; index < ways.size();index++) {
+				if(ways.get(index).size() < smaller) {
+					smaller = ways.get(index).size();
+					smallerArray = ways.get(index);
 				}
 			}
+			
+			for(Vertex v : smallerArray) {
+				result += v.getId() + " ";
+			}
 		}
-		return null;
+		return result;
 	}
 
 	@Override
@@ -411,5 +381,26 @@ public class GraphManager implements GraphManageable {
 			way.remove(0);	
 		}
 		return false;
+	}
+	
+	private List<List<Vertex>> allWays(Vertex v1, Vertex v2, List<Vertex> path, List<List<Vertex>> ways){
+		
+		if(v1.getConnectedVertices().contains(v2)) {
+			if(!path.contains(v1)) path.add(v1); 
+			path.add(v2);
+			ways.add(path);
+			return ways;
+		}
+		
+		v1.setInk(true);
+		path.add(v1);
+		for(Vertex temp : v1.getConnectedVertices()) {
+			List<Vertex> path2 = new ArrayList<>();
+			if(!temp.getInk()) {
+				path2.addAll(path);
+				allWays(temp,v2,path2,ways);
+			}
+		}
+		return ways;
 	}
 }
