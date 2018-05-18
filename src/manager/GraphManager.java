@@ -158,8 +158,7 @@ public class GraphManager implements GraphManageable {
 
 	@Override
 	public int getEdgeNumber(Graph graph) {
-		// TODO Auto-generated method stub
-		return 0;
+		return graph.getEdges().size();
 	}
 
 	@Override
