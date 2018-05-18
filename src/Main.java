@@ -45,6 +45,9 @@ public class Main {
 		
 		int g4 = manager.getVertexNumber(manager.readGraph("resources/simpleGraph.txt"));
 		System.out.println("Número do vertices --> " + g4);
+		
+		float g5 = manager.getMeanEdge(manager.readGraph("resources/weightedGraph.txt"));
+		System.out.println("tt" + g5);
 			
 		// testes bfs,dfs,connected
 		
