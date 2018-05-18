@@ -49,6 +49,7 @@ public abstract class Graph {
 		return true;
 	}
 	
+	
 	public int getVertexNumber() {
 		return vertices.size();
 	}

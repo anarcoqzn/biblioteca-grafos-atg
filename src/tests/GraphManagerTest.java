@@ -15,6 +15,11 @@ public class GraphManagerTest {
 	GraphManager manager;
 	Graph simpleGraph;
 	Graph weightedGraph;
+	Graph graph;
+	String representationSimpleAL;
+	String representationSimpleAM;
+	String representationWeightAL;
+	String representationWeightAM;
 	VNormal v1;
 	VNormal v2;
 	VNormal v3;
@@ -23,13 +28,16 @@ public class GraphManagerTest {
 	GNormal g1;
 	
 	
-	
 	@Before
 	public void setUp() {
 		
 		manager = new GraphManager();
 		simpleGraph = manager.readGraph("resources/simpleGraph.txt");
 		weightedGraph = manager.readWeightedGraph("resources/weightedGraph.txt");
+		representationSimpleAL = manager.graphRepresentation(simpleGraph, "AL");
+		representationSimpleAM = manager.graphRepresentation(simpleGraph, "AM");
+		representationWeightAL = manager.graphRepresentation(weightedGraph, "AL");
+		representationWeightAM = manager.graphRepresentation(weightedGraph, "AM");
 		v1 = new VNormal("1");
 		v2 = new VNormal("2");
 		v3 = new VNormal("3");
@@ -52,10 +60,27 @@ public class GraphManagerTest {
 	@Test
 	public void readGraphTest() {
 		
+		graph = manager.readGraph("resources/simpleGraph.txt");
+		assertEquals(graph.getVertices(), simpleGraph.getVertices());
 	}
 	
 	@Test
 	public void readWeightedGraphTest() {
+		
+		graph = manager.readWeightedGraph("resources/weightedGraph.txt");
+		assertEquals(graph.getVertices(), weightedGraph.getVertices());
+		
+		
+	}
+		
+	@Test
+	public void getVertexNumberTest() {
+		
+		int vertex1 = manager.getVertexNumber(simpleGraph);
+		assertEquals(5, vertex1);
+		
+		int vertex2 = manager.getVertexNumber(weightedGraph);
+		assertEquals(5, vertex2);
 		
 	}
 	
@@ -69,19 +94,7 @@ public class GraphManagerTest {
 		assertEquals(6, edge2);
 		
 	}
-	
-	@Test
-	public void getVertexNumberTest() {
 		
-		int vertex1 = manager.getVertexNumber(simpleGraph);
-		assertEquals(5, vertex1);
-		
-		int vertex2 = manager.getVertexNumber(weightedGraph);
-		assertEquals(5, vertex2);
-		
-	}
-	
-	
 	@Test
 	public void getMeanEdgeTest() {
 		
@@ -98,16 +111,28 @@ public class GraphManagerTest {
 	@Test
 	public void getRepresentationTest() {
 		
+		String representationSAL = manager.graphRepresentation(simpleGraph, "AL");
+		assertEquals(representationSimpleAL, representationSAL);
+		
+		String representationSAM = manager.graphRepresentation(simpleGraph, "AM");
+		assertEquals(representationSimpleAM, representationSAM);
+		
+		String representationWAL = manager.graphRepresentation(weightedGraph, "AL");
+		assertEquals(representationWeightAL, representationWAL);
+		
+		String representationWAM = manager.graphRepresentation(weightedGraph, "AM");
+		assertEquals(representationWeightAM, representationWAM);
+		
 	}
 	
 	@Test
-	public void bfsGNormalTest() {
+	public void BFSTest() {
 		String bfs = manager.BFS(g1, v1);
 		assertEquals("1 - 0 -\n2 - 1 1\n3 - 2 5\n4 - 2 5\n5 - 1 1",bfs);
 	}
 	
 	@Test
-	public void dfsGNormalTest(){
+	public void DFSTest() {
 		String dfs = manager.DFS(g1, v1);
 		assertEquals("1 - 0 -\n2 - 1 1\n3 - 3 5\n4 - 3 5\n5 - 2 2",dfs);
 	}
@@ -117,5 +142,21 @@ public class GraphManagerTest {
 		boolean connected = manager.connected(g1);
 		assertEquals(true,connected);
 	}
+	
+	@Test 
+	public void conectedTest() {
+		
+	}
+	
+	@Test
+	public void shortestPath() {
+		
+	}
+	
+	@Test
+	public void mstTest() {
+		
+	}
+	
 
 }
