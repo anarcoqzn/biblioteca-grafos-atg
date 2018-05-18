@@ -14,6 +14,7 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 	
 		GraphManager manager = new GraphManager();
+		Graph graph;
 		
 		Graph g = manager.readWeightedGraph("resources/weightedGraph.txt");
 		
@@ -21,6 +22,14 @@ public class Main {
 		//System.out.println(g + "\n");
 				
 		Graph g2 = manager.readGraph("resources/simpleGraph.txt");
+		
+		Vertex vertex;
+		
+		graph = manager.readGraph("resources/weightedGraph.txt");
+		Vertex t1 = graph.searchVertexById("1");
+		System.out.println( "t " + t1 + " --> tt");
+		
+		
 		
 		//System.out.println(g2);
 		
@@ -80,7 +89,7 @@ public class Main {
 			System.out.println("é desconexo");
 		}*/
 		
-		System.out.println(manager.graphRepresentation(g2,""));
+	//	System.out.println(manager.graphRepresentation(g2,""));
 		
 	}
 }
