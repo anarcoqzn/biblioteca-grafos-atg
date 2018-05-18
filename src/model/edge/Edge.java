@@ -68,5 +68,9 @@ public abstract class Edge {
 		return initialVertex + " -> " + finalVertex;
 
 	}
+	public boolean temVertice (Vertex v) {
+		return this.initialVertex == v || this.finalVertex == v;
+		
+	}
 	
 }

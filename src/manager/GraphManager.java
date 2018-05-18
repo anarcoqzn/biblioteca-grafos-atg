@@ -354,8 +354,46 @@ public class GraphManager implements GraphManageable {
 
 	@Override
 	public String mst(Graph graph) {
-		// TODO Auto-generated method stub
-		return null;
+		if(! (graph instanceof GWeighted))
+			return "Grafo precisa ser ponderado";
+		else if(!(connected(graph))) {
+			return "Grafo precisa ser conexo";
+		}else {
+			ArrayList<Vertex> arvore = new ArrayList<>();
+			ArrayList<Edge> arestas = new ArrayList<>();
+			HashMap<String, String> rep = new HashMap<>();
+			List<Vertex> vertices = graph.getVertices();
+			vertices.get(0).setDepth(0);
+			String line = vertices.get(0).getId() + " - " + vertices.get(0).getDepth() + " -";
+			rep.put(vertices.get(0).getId(), line);
+			vertices.get(0).setInk(true);
+			arvore.add(vertices.get(0));
+			while(arvore.size() < vertices.size()) {
+				ArrayList<Edge> aux = new ArrayList<>();
+				for(Edge edge : graph.getEdges()) {
+					if(edge.temVertice(arvore.get(arvore.size()-1))) {
+						if(edge.getInitialVertex().getInk() == true && edge.getFinalVertex().getInk())
+						aux.add(edge);
+					}
+				}	
+				for(Edge ed : aux) {
+					arestas.add(ed);
+				}
+				
+				
+				
+				
+			}
+			String exit = "";
+			for(Vertex vertex : graph.getVertices()) {
+				exit += rep.get(vertex.getId());
+				vertex.setInk(false);
+			}
+			return exit;
+		}	
+		
+			
+		
 	}
 
 	@Override
