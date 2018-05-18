@@ -8,6 +8,7 @@ public abstract class Vertex {
 	protected String id;
 	protected List<Vertex> connectedVertices;
 	protected boolean ink;
+	protected int depth;
 	
 	private double distanciaMin = Double.MAX_VALUE;
 	protected Vertex vertexAnterior;
@@ -66,5 +67,14 @@ public abstract class Vertex {
 
 	public void setVertexAnterior(Vertex vertexAnterior) {
 		this.vertexAnterior = vertexAnterior;
+	}
+
+	public void setDepth(int depth) {
+		this.depth = depth;
+		
+	}
+	
+	public int getDepth() {
+		return this.depth;
 	}
 }
