@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import model.edge.*;
 import model.graph.GNormal;
 import model.graph.GWeighted;
 import model.graph.Graph;
@@ -28,8 +29,6 @@ public class GraphManager implements GraphManageable {
 			quantidadeVertices = Integer.parseInt(ler.readLine());
 			primeiraLinha = ler.readLine();
 			graph = new GNormal(quantidadeVertices);
-					
-			System.out.println("Quantidade de vertices: " + quantidadeVertices);
 					
 			do {
 					
@@ -65,9 +64,10 @@ public class GraphManager implements GraphManageable {
 					graph.addVertex(vertice1);
 					graph.addVertex(vertice2);
 				}
-						
-				System.out.println("Arestas : " + quantidadeVertice[0]+ "->" + quantidadeVertice[1]);
 				
+				graph.addEdge(new EdgeNormal(vertice1, vertice2)); //classe Edge
+
+						
 				primeiraLinha = ler.readLine();
 		 			
 				}while(primeiraLinha!= null);
@@ -129,6 +129,7 @@ public class GraphManager implements GraphManageable {
 	                	graph.addVertex(firstVertex);
 	                	graph.addVertex(secondVertex);
 	                }   
+	                graph.addEdge(new EdgeWeighted(firstVertex, secondVertex, weight));//classe Edge
 	                line1 = reader.readLine();
 	                               
 	        }while(line1 != null);
@@ -143,19 +144,24 @@ public class GraphManager implements GraphManageable {
 	@Override
 	public int getVertexNumber(Graph graph) {
 		// TODO Auto-generated method stub
-		return 0;
+		return graph.getVertexNumber();
 	}
 
 	@Override
 	public int getEdgeNumber(Graph graph) {
 		// TODO Auto-generated method stub
-		return 0;
+		
+		return graph.getEdges().size();
+		
 	}
 
 	@Override
 	public float getMeanEdge(Graph graph) {
 		// TODO Auto-generated method stub
-		return 0;
+		float edgeNumber = graph.getEdges().size();
+		float verticesNumber = graph.getVertexNumber();
+		
+		return (2*edgeNumber)/verticesNumber;
 	}
 
 	@Override

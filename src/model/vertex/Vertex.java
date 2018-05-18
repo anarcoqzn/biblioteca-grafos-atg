@@ -7,14 +7,27 @@ public abstract class Vertex {
 	
 	protected String id;
 	protected List<Vertex> connectedVertices;
+	protected boolean ink;
+	
+	private double distanciaMin = Double.MAX_VALUE;
+	protected Vertex vertexAnterior;
 	
 	public Vertex(String id) {
 		this.id = id;
 		connectedVertices = new ArrayList<>();
+		this.ink = false;
 	}
 	
 	public String getId() {
 		return this.id;
+	}
+	
+	public boolean getInk() {
+		return ink;
+	}
+	
+	public void setInk(boolean ink) {
+		this.ink = ink;
 	}
 	
 	public List<Vertex> getConnectedVertices(){
@@ -38,4 +51,21 @@ public abstract class Vertex {
 	public String toString() {
 		return getId();
 	}
+	
+	public double getDistanciaMin() {
+		return distanciaMin;
+	}
+
+	public void setDistanciaMin(double distanciaMin) {
+		this.distanciaMin = distanciaMin;
+	}
+	
+	public Vertex getVertexAnterior() {
+		return vertexAnterior;
+	}
+
+	public void setVertexAnterior(Vertex vertexAnterior) {
+		this.vertexAnterior = vertexAnterior;
+	}
+	
 }
