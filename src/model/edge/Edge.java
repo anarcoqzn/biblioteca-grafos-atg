@@ -32,8 +32,10 @@ public abstract class Edge {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+
 		result = prime * result + ((finalVertex == null) ? 0 : finalVertex.hashCode());
 		result = prime * result + ((initialVertex == null) ? 0 : initialVertex.hashCode());
+
 		return result;
 	}
 
@@ -51,6 +53,7 @@ public abstract class Edge {
 				return false;
 		} else if (!finalVertex.equals(other.finalVertex))
 			return false;
+
 		if (initialVertex == null) {
 			if (other.initialVertex != null)
 				return false;
@@ -61,7 +64,9 @@ public abstract class Edge {
 
 	@Override
 	public String toString() {
+
 		return initialVertex + " -> " + finalVertex;
+
 	}
 	
 }

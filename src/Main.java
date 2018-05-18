@@ -16,6 +16,7 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 	
 		GraphManager manager = new GraphManager();
+		Graph graph;
 		
 		Graph g = manager.readWeightedGraph("resources/weightedGraph.txt");
 		
@@ -23,6 +24,14 @@ public class Main {
 		//System.out.println(g + "\n");
 				
 		Graph g2 = manager.readGraph("resources/simpleGraph.txt");
+		
+		Vertex vertex;
+		
+		graph = manager.readGraph("resources/weightedGraph.txt");
+		Vertex t1 = graph.searchVertexById("1");
+		System.out.println( "t " + t1 + " --> tt");
+		
+		
 		
 		//System.out.println(g2);
 		
@@ -37,10 +46,19 @@ public class Main {
 		manager.shortestPath(g, v1, v2);
 		
 		System.out.println(g2);
+		
+		
 		int g3 = manager.getEdgeNumber(manager.readGraph("resources/weightedGraph.txt"));
 		System.out.println(manager.getMeanEdge(g));
 		
 		System.out.println("Número de arestas --> " + g3);
+		
+		
+		int g4 = manager.getVertexNumber(manager.readGraph("resources/simpleGraph.txt"));
+		System.out.println("Número do vertices --> " + g4);
+		
+		float g5 = manager.getMeanEdge(manager.readGraph("resources/weightedGraph.txt"));
+		System.out.println("tt" + g5);
 			
 		// testes bfs,dfs,connected
 		
@@ -73,6 +91,7 @@ public class Main {
 			System.out.println("é desconexo");
 		}*/
 		
+		System.out.println(manager.graphRepresentation(g2,""));
 		List<Vertex> path = new ArrayList<>();
 		List<List<Vertex>> path2 = new ArrayList<>();
 		Vertex v1 = g.searchVertexById("1");

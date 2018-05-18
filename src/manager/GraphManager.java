@@ -19,15 +19,17 @@ public class GraphManager implements GraphManageable {
 		
 		BufferedReader read; 		
 		String firstLine = null;
-		int verticesQuantity = 0;
+		int quantityVertex = 0;
 		Graph graph = null;
 				
 		try {
 					
 			read = new BufferedReader(new FileReader(path));
-			verticesQuantity = Integer.parseInt(read.readLine());
+			
+			quantityVertex = Integer.parseInt(read.readLine());
 			firstLine = read.readLine();
-			graph = new GNormal(verticesQuantity);
+			graph = new GNormal(quantityVertex);
+			
 			
 			do {
 					
@@ -263,12 +265,12 @@ public class GraphManager implements GraphManageable {
 			way.remove(0);	
 			
 		}
-		String retorno = "";
+		String exit = "";
 		for(Vertex vertex : graph.getVertices()) {
-			retorno += rep.get(vertex.getId());
+			exit += rep.get(vertex.getId());
 			vertex.setInk(false);
 		}
-		return retorno;
+		return exit;
 	}
 
 	@Override
