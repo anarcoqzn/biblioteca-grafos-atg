@@ -21,60 +21,60 @@ public class GraphManager implements GraphManageable {
 	@Override
 	public Graph readGraph(String path){
 		
-		BufferedReader ler; 		
-		String primeiraLinha = null;
-		int quantidadeVertices = 0;
+		BufferedReader read; 		
+		String firstLine = null;
+		int verticesQuantity = 0;
 		Graph graph = null;
 				
 		try {
 					
-			ler = new BufferedReader(new FileReader(path));
-			quantidadeVertices = Integer.parseInt(ler.readLine());
-			primeiraLinha = ler.readLine();
-			graph = new GNormal(quantidadeVertices);
+			read = new BufferedReader(new FileReader(path));
+			verticesQuantity = Integer.parseInt(read.readLine());
+			firstLine = read.readLine();
+			graph = new GNormal(verticesQuantity);
 			
 			do {
 					
-				String[] quantidadeVertice = primeiraLinha.split(" ");
+				String[] vertexData = firstLine.split(" ");
 						
-				VNormal vertice1 = (VNormal) graph.searchVertexById(quantidadeVertice[0]) ;
-				VNormal vertice2 = (VNormal) graph.searchVertexById(quantidadeVertice[1]);
+				VNormal vertex1 = (VNormal) graph.searchVertexById(vertexData[0]) ;
+				VNormal vertex2 = (VNormal) graph.searchVertexById(vertexData[1]);
 						
-				if(vertice1 != null && vertice2 != null) {
+				if(vertex1 != null && vertex2 != null) {
 					
-					vertice1.connectTo(vertice2);
+					vertex1.connectTo(vertex2);
 					
-				}else if(vertice1 != null && vertice2 == null) {
+				}else if(vertex1 != null && vertex2 == null) {
 					
-					vertice2 = new VNormal(quantidadeVertice[1]);
-					vertice1.connectTo(vertice2);
+					vertex2 = new VNormal(vertexData[1]);
+					vertex1.connectTo(vertex2);
 					
-					graph.addVertex(vertice2);
+					graph.addVertex(vertex2);
 					
-				}else if(vertice1 == null && vertice2 != null) {
+				}else if(vertex1 == null && vertex2 != null) {
 
-					vertice1 = new VNormal(quantidadeVertice[0]);
-					vertice1.connectTo(vertice2);
+					vertex1 = new VNormal(vertexData[0]);
+					vertex1.connectTo(vertex2);
 					
-					graph.addVertex(vertice1);
+					graph.addVertex(vertex1);
 						
 				}else {
 							
-					vertice1 = new VNormal(quantidadeVertice[0]);
-					vertice2 = new VNormal(quantidadeVertice[1]);
-					vertice1.connectTo(vertice2);
+					vertex1 = new VNormal(vertexData[0]);
+					vertex2 = new VNormal(vertexData[1]);
+					vertex1.connectTo(vertex2);
 							
-					graph.addVertex(vertice1);
-					graph.addVertex(vertice2);
+					graph.addVertex(vertex1);
+					graph.addVertex(vertex2);
 				}
 				
-				graph.addEdge(new EdgeNormal(vertice1, vertice2)); //classe Edge
+				graph.addEdge(new EdgeNormal(vertex1, vertex2)); //classe Edge
 						
-				primeiraLinha = ler.readLine();
+				firstLine = read.readLine();
 		 			
-				}while(primeiraLinha!= null);
+				}while(firstLine!= null);
 						
-					ler.close();
+					read.close();
 				
 		}catch(FileNotFoundException e){  
 		            
@@ -155,43 +155,116 @@ public class GraphManager implements GraphManageable {
 
 	@Override
 	public float getMeanEdge(Graph graph) {
-		float edgeNumber = graph.getEdges().size();
-		float verticesNumber = graph.getVertexNumber();
+		float edgeNumber = getEdgeNumber(graph);
+		float verticesNumber = getVertexNumber(graph);
 		
 		return (2*edgeNumber)/verticesNumber;
 	}
 
 	@Override
 	public String graphRepresentation(Graph graph, String type) {
-		// TODO Auto-generated method stub
-		return null;
+		if(type == "AL") return adjacencyList(graph);
+		else if(type == "AM") return adjacencyMatrix(graph);
+		else return "Tipo de representação não existente";
+	}
+	
+	private String adjacencyMatrix(Graph graph) {
+		
+		String saida = "";
+		int matrixSize = graph.getVertexNumber() + 1;
+		String[][] matrix = new String[matrixSize][matrixSize];
+		
+		for(int i = 0; i < matrixSize; i++) {
+			if (i == 0)	matrix[0][i] = " ";
+			else matrix[0][i] = graph.getVertices().get(i-1).getId();
+		}
+		
+		for(int i = 0; i < matrixSize; i++) {
+			if (i == 0)	matrix[i][0] = " ";
+			else matrix[i][0] = graph.getVertices().get(i-1).getId();
+		}
+		if(graph instanceof GNormal) {
+			for(int i = 1; i < matrixSize; i++) {
+				VNormal current = (VNormal) graph.getVertices().get(i-1); 
+
+				for(int j = 1; j < matrixSize; j++) {
+					VNormal current2 = (VNormal) graph.getVertices().get(j-1);
+					
+					if(current.getConnectedVertices().contains(current2)) matrix[i][j] = "1";
+					else matrix[i][j] = "0";
+				}
+			}
+		}else if(graph instanceof GWeighted){
+			for(int i = 1; i < matrixSize; i++) {
+				VWeighted current = (VWeighted) graph.getVertices().get(i-1); 
+				for(int j = 1; j < matrixSize; j++) {
+					VWeighted current2 = (VWeighted) graph.getVertices().get(j-1);
+					
+					if(current.getConnectedVertices().contains(current2))	matrix[i][j] = current.getConnectionWeight(current2).toString();
+					else matrix[i][j] = "0";
+				}
+			}
+		}
+		
+		for(int i = 0; i < matrixSize; i++) {
+			for(int j = 0; j < matrixSize; j++) {
+				saida += matrix[i][j] + " ";
+			}
+			saida += "\n";
+		}
+		
+		return saida;
 	}
 
+	private String adjacencyList(Graph graph) {
+		String result = "";
+		
+		if(graph instanceof GNormal) {
+			for(Vertex v : graph.getVertices()) {
+				result += v.getId() + " - ";
+				for(Vertex v2 : v.getConnectedVertices()) {
+					result += v2.getId() + " ";
+				}
+				result += "\n";
+			}
+			
+		}else if(graph instanceof GWeighted) {
+			for(Vertex v : graph.getVertices()) {
+				result += v.getId() + " - ";
+				for(Vertex v2 : v.getConnectedVertices()) {
+					result += v2.getId() + "(" +((VWeighted)v).getConnectionWeight(v2)+")" + " ";
+				}
+				result += "\n";
+			}
+		}
+		return result;
+	}
+	
 	@Override
 	public String BFS(Graph graph, Vertex v) {
-		ArrayList<Vertex> caminho = new ArrayList<Vertex>();	
+		ArrayList<Vertex> way = new ArrayList<Vertex>();	
 		HashMap<String, String> rep = new HashMap<>();
 		v.setDepth(0);
 		String line = v.getId() + " - " + v.getDepth() + " -\n";	
 		v.setInk(true);
 		rep.put(v.getId(),line);
-		caminho.add(v);		
-		while (!caminho.isEmpty()){	
+		way.add(v);		
+		while (!way.isEmpty()){	
 			ArrayList<Vertex> aux = new ArrayList<Vertex>();
-			for(Vertex vert : caminho.get(0).getConnectedVertices()) {
+			for(Vertex vert : way.get(0).getConnectedVertices()) {
 				aux.add(vert);
 			}	
 			while(!aux.isEmpty()){		
 				if(aux.get(0).getInk() == false) {
 					aux.get(0).setInk(true);
-					aux.get(0).setDepth(caminho.get(0).getDepth()+1);
-					caminho.add(aux.get(0));	
-					line = aux.get(0).getId() + " - " + aux.get(0).getDepth() + " " + caminho.get(0).getId() + "\n";	
+					aux.get(0).setDepth(way.get(0).getDepth()+1);
+					way.add(aux.get(0));	
+					line = aux.get(0).getId() + " - " + aux.get(0).getDepth() + " " + way.get(0).getId() + "\n";	
 					rep.put(aux.get(0).getId(), line);
 				}
 				aux.remove(0);	
 			}
-			caminho.remove(0);	
+			way.remove(0);	
 			
 		}
 		String retorno = "";
@@ -205,16 +278,16 @@ public class GraphManager implements GraphManageable {
 	@Override
 	public String DFS(Graph graph, Vertex v) {
 		
-		ArrayList<Vertex> caminho = new ArrayList<Vertex>();	
+		ArrayList<Vertex> way = new ArrayList<Vertex>();	
 		HashMap<String, String> rep = new HashMap<>();
 		v.setDepth(0);	
 		String line = v.getId() + " - " + v.getDepth() + " -\n";	
 		v.setInk(true);	
 		rep.put(v.getId(),line);
-		caminho.add(v);
+		way.add(v);
 		while(!graph.isColored()) {	
 			ArrayList<Vertex> aux = new ArrayList<Vertex>();
-			for(Vertex vert : caminho.get(caminho.size()-1).getConnectedVertices()) {
+			for(Vertex vert : way.get(way.size()-1).getConnectedVertices()) {
 				aux.add(vert);
 			}
 			boolean colored = false;	
@@ -222,23 +295,23 @@ public class GraphManager implements GraphManageable {
 				if(aux.get(i).getInk() == false) {	
 					colored = true; 	
 					aux.get(i).setInk(true);	
-					aux.get(i).setDepth(caminho.get(caminho.size()-1).getDepth()+1);
-					caminho.add(aux.get(i));	
-					line = aux.get(i).getId() + " - " + aux.get(i).getDepth() + " " + caminho.get(caminho.size()-2).getId() + "\n";	
+					aux.get(i).setDepth(way.get(way.size()-1).getDepth()+1);
+					way.add(aux.get(i));	
+					line = aux.get(i).getId() + " - " + aux.get(i).getDepth() + " " + way.get(way.size()-2).getId() + "\n";	
 					rep.put(aux.get(i).getId(), line);
 					break;
 				}
 			}
 			if(colored == false) {	
-				caminho.remove(caminho.size()-1);			
+				way.remove(way.size()-1);			
 			}			
 		}
-		String retorno = "";
+		String exit = "";
 		for(Vertex vertex : graph.getVertices()) {
-			retorno += rep.get(vertex.getId());
+			exit += rep.get(vertex.getId());
 			vertex.setInk(false);
 		}
-		return retorno;
+		return exit;
 	}
 
 	@Override
@@ -268,17 +341,17 @@ public class GraphManager implements GraphManageable {
 		}else if(graph instanceof GWeighted && v1 instanceof VWeighted && v2 instanceof VWeighted) {
 			System.out.println("grafo ponderado"); //apenas p teste
 			v1.setDistanciaMin(0);
-			int comprimento = graph.getVertexNumber();
+			int length = graph.getVertexNumber();
 			
-			for (int i = 0; i < comprimento-1; i++) {
-				for (Edge aresta : graph.getEdges()) {
+			for (int i = 0; i < length-1; i++) {
+				for (Edge edge : graph.getEdges()) {
 					
-					if(aresta.getVertexInicial().getDistanciaMin() == Double.MAX_VALUE) continue;
+					if(edge.getInitialVertex().getDistanciaMin() == Double.MAX_VALUE) continue;
 					
-					Vertex v = aresta.getVertexInicial();
-					Vertex u = aresta.getVertexFinal();
+					Vertex v = edge.getInitialVertex();
+					Vertex u = edge.getFinalVertex();
 					
-					double novaDistancia = v.getDistanciaMin() + ((EdgeWeighted)aresta).getPeso();
+					double novaDistancia = v.getDistanciaMin() + ((EdgeWeighted)edge).getWeight();
 					
 					if(novaDistancia < u.getDistanciaMin()) {
 						u.setDistanciaMin(novaDistancia);
@@ -287,7 +360,7 @@ public class GraphManager implements GraphManageable {
 				}
 
 				for(Edge aresta : graph.getEdges()) {
-					if(aresta.getVertexInicial().getDistanciaMin() != Double.MAX_VALUE) {
+					if(aresta.getInitialVertex().getDistanciaMin() != Double.MAX_VALUE) {
 						//if(existeCiclo(arest)){
 						//	syso("Existe uma aresta negativa");
 						//	return;
@@ -315,12 +388,12 @@ public class GraphManager implements GraphManageable {
 
 	@Override
 	public Boolean path(Vertex v1, Vertex v2) {
-		ArrayList<Vertex> caminho = new ArrayList<Vertex>();
+		ArrayList<Vertex> way = new ArrayList<Vertex>();
 		v1.setInk(true);	
-		caminho.add(v1);	
-		while (!caminho.isEmpty()){		
+		way.add(v1);	
+		while (!way.isEmpty()){		
 			ArrayList<Vertex> aux = new ArrayList<Vertex>();
-			for(Vertex vert : caminho.get(caminho.size()-1).getConnectedVertices()) {
+			for(Vertex vert : way.get(way.size()-1).getConnectedVertices()) {
 				aux.add(vert);
 			}	
 			while(!aux.isEmpty()){		
@@ -330,12 +403,12 @@ public class GraphManager implements GraphManageable {
 					}
 					else {	
 						aux.get(0).setInk(true);
-						caminho.add(aux.get(0));
+						way.add(aux.get(0));
 					}
 				}
 				aux.remove(0);
 			}
-			caminho.remove(0);	
+			way.remove(0);	
 		}
 		return false;
 	}

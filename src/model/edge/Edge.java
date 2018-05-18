@@ -4,36 +4,36 @@ import model.vertex.Vertex;
 
 public abstract class Edge {
 	
-	protected Vertex vertexInicial;
-	protected Vertex vertexFinal;
+	protected Vertex initialVertex;
+	protected Vertex finalVertex;
 	
-	public Edge(Vertex vi, Vertex vf) {
-		this.vertexInicial = vi;
-		this.vertexFinal = vf;
+	public Edge(Vertex initialVertex, Vertex finalVertex) {
+		this.initialVertex = initialVertex;
+		this.finalVertex = finalVertex;
 	}
 
-	public Vertex getVertexInicial() {
-		return vertexInicial;
+	public Vertex getInitialVertex() {
+		return initialVertex;
 	}
 
-	public void setVertexInicial(Vertex verticeInicial) {
-		this.vertexInicial = verticeInicial;
+	public void setInitialVertex(Vertex initialVertex) {
+		this.initialVertex = initialVertex;
 	}
 
-	public Vertex getVertexFinal() {
-		return vertexFinal;
+	public Vertex getFinalVertex() {
+		return finalVertex;
 	}
 
-	public void setVertexFinal(Vertex verticeFinal) {
-		this.vertexFinal = verticeFinal;
+	public void setFinalVertex(Vertex finalVertex) {
+		this.finalVertex = finalVertex;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((vertexFinal == null) ? 0 : vertexFinal.hashCode());
-		result = prime * result + ((vertexInicial == null) ? 0 : vertexInicial.hashCode());
+		result = prime * result + ((finalVertex == null) ? 0 : finalVertex.hashCode());
+		result = prime * result + ((initialVertex == null) ? 0 : initialVertex.hashCode());
 		return result;
 	}
 
@@ -46,22 +46,22 @@ public abstract class Edge {
 		if (getClass() != obj.getClass())
 			return false;
 		Edge other = (Edge) obj;
-		if (vertexFinal == null) {
-			if (other.vertexFinal != null)
+		if (finalVertex == null) {
+			if (other.finalVertex != null)
 				return false;
-		} else if (!vertexFinal.equals(other.vertexFinal))
+		} else if (!finalVertex.equals(other.finalVertex))
 			return false;
-		if (vertexInicial == null) {
-			if (other.vertexInicial != null)
+		if (initialVertex == null) {
+			if (other.initialVertex != null)
 				return false;
-		} else if (!vertexInicial.equals(other.vertexInicial))
+		} else if (!initialVertex.equals(other.initialVertex))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return vertexInicial + " -> " + vertexFinal;
+		return initialVertex + " -> " + finalVertex;
 	}
 	
 }

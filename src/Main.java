@@ -13,19 +13,19 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 	
-		GraphManageable manager = new GraphManager();
+		GraphManager manager = new GraphManager();
 		
 		Graph g = manager.readWeightedGraph("resources/weightedGraph.txt");
 		
-		System.out.println("Grafo com pesos" + "\n");
-		System.out.println(g + "\n");
+		//System.out.println("Grafo com pesos" + "\n");
+		//System.out.println(g + "\n");
 				
 		Graph g2 = manager.readGraph("resources/simpleGraph.txt");
 		
-		System.out.println(g2);
+		//System.out.println(g2);
 		
 		//teste classe Edge
-		System.out.println(g2.getEdges());
+		/*System.out.println(g2.getEdges());
 
 		System.out.println("Grafo normal" + "\n");
 		System.out.println(g2 + "\n");
@@ -69,8 +69,9 @@ public class Main {
 		}
 		else {
 			System.out.println("é desconexo");
-		}
+		}*/
 		
+		System.out.println(manager.graphRepresentation(g2,""));
 		
 	}
 }

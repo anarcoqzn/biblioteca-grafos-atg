@@ -4,19 +4,18 @@ import model.vertex.Vertex;
 
 public class EdgeWeighted extends Edge{
 
-	protected double peso;
+	protected double weight;
 	
-	public EdgeWeighted(Vertex vi, Vertex vf, double peso) {
-		super(vi, vf);
-		this.peso = peso;
+	public EdgeWeighted(Vertex initialVertex, Vertex finalVertex, double weight) {
+		super(initialVertex, finalVertex);
+		this.weight = weight;
 	}
 
-	public double getPeso() {
-		return peso;
+	public double getWeight() {
+		return weight;
 	}
 
-	public void setPeso(double peso) {
-		this.peso = peso;
+	public void setWeight(double weight) {
+		this.weight = weight;
 	}
-
 }
