@@ -13,6 +13,11 @@ public class GraphManagerTest {
 	GraphManager manager;
 	Graph simpleGraph;
 	Graph weightedGraph;
+	Graph graph;
+	String representationSimpleAL;
+	String representationSimpleAM;
+	String representationWeightAL;
+	String representationWeightAM;
 	
 	@Before
 	public void setUp() {
@@ -20,16 +25,37 @@ public class GraphManagerTest {
 		manager = new GraphManager();
 		simpleGraph = manager.readGraph("resources/simpleGraph.txt");
 		weightedGraph = manager.readWeightedGraph("resources/weightedGraph.txt");
+		representationSimpleAL = manager.graphRepresentation(simpleGraph, "AL");
+		representationSimpleAM = manager.graphRepresentation(simpleGraph, "AM");
+		representationWeightAL = manager.graphRepresentation(weightedGraph, "AL");
+		representationSimpleAM = manager.graphRepresentation(weightedGraph, "AM");
 		
 	}
 	
 	@Test
 	public void readGraphTest() {
 		
+		graph = manager.readGraph("resources/simpleGraph.txt");
+		//assertEquals(graph, simpleGraph);
 	}
 	
 	@Test
 	public void readWeightedGraphTest() {
+		
+		graph = manager.readWeightedGraph("resources/weightedGraph.txt");
+		//assertEquals(graph, weightedGraph);
+		
+		
+	}
+		
+	@Test
+	public void getVertexNumberTest() {
+		
+		int vertex1 = manager.getVertexNumber(simpleGraph);
+		assertEquals(5, vertex1);
+		
+		int vertex2 = manager.getVertexNumber(weightedGraph);
+		assertEquals(5, vertex2);
 		
 	}
 	
@@ -43,19 +69,7 @@ public class GraphManagerTest {
 		assertEquals(6, edge2);
 		
 	}
-	
-	@Test
-	public void getVertexNumberTest() {
 		
-		int vertex1 = manager.getVertexNumber(simpleGraph);
-		assertEquals(5, vertex1);
-		
-		int vertex2 = manager.getVertexNumber(weightedGraph);
-		assertEquals(5, vertex2);
-		
-	}
-	
-	
 	@Test
 	public void getMeanEdgeTest() {
 		
@@ -71,6 +85,43 @@ public class GraphManagerTest {
 	
 	@Test
 	public void getRepresentationTest() {
+		
+		String representationSAL = manager.graphRepresentation(simpleGraph, "AL");
+		assertEquals(representationSimpleAL, representationSAL);
+		
+		String representationSAM = manager.graphRepresentation(simpleGraph, "AM");
+		///assertEquals(representationSimpleAM, representationSAM);
+		
+		String representationWAL = manager.graphRepresentation(weightedGraph, "AL");
+		//assertEquals(representationWeightAL, representationSAL);
+		
+		String representationWAM = manager.graphRepresentation(weightedGraph, "AM");
+	//	assertEquals(representationWeightAM, representationWAM);
+		
+	}
+	
+	@Test
+	public void BFSTest() {
+		
+	}
+	
+	@Test
+	public void DFSTest() {
+		
+	}
+	
+	@Test 
+	public void conectedTest() {
+		
+	}
+	
+	@Test
+	public void shortestPath() {
+		
+	}
+	
+	@Test
+	public void mstTest() {
 		
 	}
 

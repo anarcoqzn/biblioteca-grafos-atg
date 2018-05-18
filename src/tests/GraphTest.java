@@ -55,25 +55,4 @@ public class GraphTest {
 		
 	}
 	
-	@Test
-	public void isColoredTest() {
-		
-	}
-	
-	@Test
-	public void getVertexNumber() {
-	
-		
-	}
-	
-	@Test
-	public void getVertices() {
-		
-	}
-	
-	@Test
-	public void getEdges() {
-		
-	}
-	
 }

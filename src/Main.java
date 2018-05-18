@@ -27,7 +27,14 @@ public class Main {
 		
 		graph = manager.readGraph("resources/weightedGraph.txt");
 		Vertex t1 = graph.searchVertexById("1");
-		System.out.println( "t " + t1 + " --> tt");
+	//	System.out.println( "t " + t1 + " --> tt");
+		
+		
+		Graph g3;
+		g3 = manager.readGraph("resources/simpleGraph.txt");
+		
+		String graph1 = manager.graphRepresentation(g3, "AL");
+		System.out.println(graph1);
 		
 		
 		
@@ -44,22 +51,22 @@ public class Main {
 		manager.shortestPath(g, v1, v2);
 		
 		System.out.println(g2);
+		*/
 		
-		
-		int g3 = manager.getEdgeNumber(manager.readGraph("resources/weightedGraph.txt"));
+		int g5 = manager.getEdgeNumber(manager.readGraph("resources/weightedGraph.txt"));
 		//System.out.println(manager.getMeanEdge(g));
 		
-		System.out.println("Número de arestas --> " + g3);
+	//	System.out.println("Número de arestas --> " + g3);
 		
 		
 		int g4 = manager.getVertexNumber(manager.readGraph("resources/simpleGraph.txt"));
-		System.out.println("Número do vertices --> " + g4);
+	//	System.out.println("Número do vertices --> " + g4);
 		
-		float g5 = manager.getMeanEdge(manager.readGraph("resources/weightedGraph.txt"));
-		System.out.println("tt" + g5);
+	//	float g5 = manager.getMeanEdge(manager.readGraph("resources/weightedGraph.txt"));
+		//System.out.println("tt" + g5);
 			
 		// testes bfs,dfs,connected
-		
+		/*
 		VNormal vv1 = new VNormal("1");
 		VNormal vv2 = new VNormal("2");
 		VNormal vv3 = new VNormal("3");
